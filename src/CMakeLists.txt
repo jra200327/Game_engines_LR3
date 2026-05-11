@@ -31,8 +31,13 @@ set(SOURCES main.cpp
         Sample/Systems/BoundariesSystem.h
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
+        GameEngine/GameEngine.h
+        GameEngine/GameEngine.cpp
+        GameEngine/Input/InputManager.cpp
+        GameEngine/Input/InputAction.h
         Ecs/Window/Window.cpp
         UI/Text.cpp
+        UI/Button.cpp
         Ecs/Managers/ScoreManager.cpp
         Ecs/Managers/RestartManager.cpp
 )

@@ -1,6 +1,10 @@
 #include "Scene.h"
 #include "GameEngine.h"
 
+Scene::Scene(GameEngine& engine): gameEngine(engine), world(), systemsManager(world)
+{
+}
+
 std::shared_ptr<InputAction> Scene::RegisterAction(const std::string &name)
 {
     // ToDo: Логика создания и сохранения экшена

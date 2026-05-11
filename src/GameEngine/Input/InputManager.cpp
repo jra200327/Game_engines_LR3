@@ -57,6 +57,10 @@ bool InputManager::ProcessInput(const size_t scene)
     }
     for (auto& [btn, action] : _actionMouseBtnMaps[scene])
     {
+        if (action->Type() == ActionType::Start)
+        {
+            action->Type() = ActionType::None;
+        }
         if (action->Type() == ActionType::End)
         {
             action->Type() = ActionType::None;
@@ -114,6 +118,7 @@ bool InputManager::ProcessInput(const size_t scene)
             if (_actionMouseBtnMaps[scene].contains(mousePressed->button))
             {
                 _actionMouseBtnMaps[scene][mousePressed->button]->Type() = ActionType::Start;
+                _actionMouseBtnMaps[scene][mousePressed->button]->Value2() = mousePressed->position;
             }
         }
         else if (const auto* mouseReleased = event->getIf<sf::Event::MouseButtonReleased>())

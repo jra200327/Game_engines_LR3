@@ -8,7 +8,7 @@ public:
     static constexpr unsigned int Width = 1280;
     static constexpr unsigned int Height = 768;
 
-    static constexpr std::string AssetsFile = "assets.json";
+    //static constexpr std::string AssetsFile = "assets.json";
 };
 
 #endif //GAMEENGINECONF_H

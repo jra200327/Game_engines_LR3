@@ -35,6 +35,8 @@ set(SOURCES main.cpp
         GameEngine/GameEngine.cpp
         GameEngine/Input/InputManager.cpp
         GameEngine/Input/InputAction.h
+        GameEngine/Scene.cpp
+        GameEngine/Scenes/MenuScene.cpp
         Ecs/Window/Window.cpp
         UI/Text.cpp
         UI/Button.cpp
@@ -54,11 +56,16 @@ target_link_libraries(${TARGET_NAME} PUBLIC easy_ecs)
 target_link_libraries(${TARGET_NAME} PUBLIC ImGui-SFML::ImGui-SFML)
 
 target_include_directories(${TARGET_NAME} PRIVATE
-    ${CMAKE_CURRENT_SOURCE_DIR}
     ${CMAKE_CURRENT_SOURCE_DIR}/Ecs
     ${CMAKE_CURRENT_SOURCE_DIR}/Sample
     ${CMAKE_CURRENT_SOURCE_DIR}/Sample/Systems
     ${CMAKE_CURRENT_SOURCE_DIR}/Sample/Components
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameEngine
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameEngine/Input
+    ${CMAKE_CURRENT_SOURCE_DIR}/GameEngine/Scenes
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/UI
 )
 
 # Copy resources to build directory

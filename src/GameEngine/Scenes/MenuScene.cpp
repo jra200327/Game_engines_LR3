@@ -14,10 +14,13 @@ void MenuScene::Init()
     _mouseClickAction = actionMap["mouse_left"];
     _mouseMoveAction = actionMap["mouse_move"];
 
+    sf::Vector2u size = gameEngine.Window().getSize();
+    sf::Vector2f center(size.x / 2.f, size.y / 2.f);
+
     const uint8_t white[3] = {255, 255, 255};
     _title = std::make_shared<Text>("../../Fonts/futura.ttf", "Level Maker", 48, white);
 
-    _title->SetPosition({420.f, 120.f});
+    _title->SetPosition({center.x - 120, 120.f});
 
     const uint8_t playTextColor[3] = {255, 255, 255};
     const uint8_t playBgColor[3] = {50, 150, 50};
@@ -25,7 +28,7 @@ void MenuScene::Init()
 
     _playButton = std::make_shared<Button>("../../Fonts/futura.ttf", "Play", 32, playSize, playTextColor, playBgColor);
 
-    _playButton->SetPosition({515.f, 300.f});
+    _playButton->SetPosition({center.x - playSize.x / 2.f, 300.f});
 
     _playButton->SetCallback([this]()
     {
@@ -41,7 +44,7 @@ void MenuScene::Init()
 
     _exitButton = std::make_shared<Button>("../../Fonts/futura.ttf", "Exit", 32, playSize, exitTextColor, exitBgColor);
 
-    _exitButton->SetPosition({515.f, 420.f});
+    _exitButton->SetPosition({center.x - playSize.x / 2.f, 420.f});
 
     _exitButton->SetCallback([this]()
     {

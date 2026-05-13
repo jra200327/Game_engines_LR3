@@ -37,6 +37,7 @@ set(SOURCES main.cpp
         GameEngine/Input/InputAction.h
         GameEngine/Scene.cpp
         GameEngine/Scenes/MenuScene.cpp
+        GameEngine/Assets/AssetManager.cpp
         Ecs/Window/Window.cpp
         UI/Text.cpp
         UI/Button.cpp

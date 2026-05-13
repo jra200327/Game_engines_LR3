@@ -9,6 +9,9 @@
 #include "../Components/ShooterComponent.h"
 #include "../Components/BulletComponent.h"
 #include "../Components/AsteroidComponent.h"
+#include "../Components/CameraComponent.h"
+#include "../Components/DefaultCameraTag.h"
+#include "../Components/FollowXCameraTag.h"
 #include <random>
 
 void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
@@ -84,6 +87,14 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         collisionStorage.Add(asteroid, CollisionComponent());
         spriteStorage.Add(asteroid, SpriteComponent(sf::Vector2i(48, 48), atlPos, _texture, 0, randomSize));
         asteroidStorage.Add(asteroid, AsteroidComponent());
+    }
+    else if(type == EntityType::DefaultCamera)
+    {
+        int camera = _world.CreateEntity();
+        auto& cameraStorage = _world.GetStorage<CameraComponent>();
+        auto& defaultCameraStorage = _world.GetStorage<DefaultCameraTag>();
+        cameraStorage.Add(camera, CameraComponent(sf::View(sf::FloatRect({0.f, 0.f}, {pos.x, pos.y}))));
+        defaultCameraStorage.Add(camera, DefaultCameraTag());
     }
 }
 

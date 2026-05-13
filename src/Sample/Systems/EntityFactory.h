@@ -10,7 +10,9 @@ enum class EntityType
 {
     Player,
     Asteroid,
-    Bullet
+    Bullet,
+    DefaultCamera,
+    FollowXCamera
 };
 
 class EntityFactory  {

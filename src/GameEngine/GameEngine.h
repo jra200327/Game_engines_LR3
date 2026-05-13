@@ -4,7 +4,7 @@
 
 #include "GameEngineConfiguration.h"
 #include "Scene.h"
-//#include "Assets/AssetManager.h"
+#include "Assets/AssetManager.h"
 #include "Input/InputManager.h"
 
 class GameEngine {
@@ -14,7 +14,7 @@ class GameEngine {
     sf::Clock _deltaClock;
 
     std::unordered_map<size_t, std::shared_ptr<Scene>> _scenes;
-    //AssetManager _assetManager;
+    AssetManager _assetManager;
     std::shared_ptr<InputManager> _inputManager;
 
     bool _isRunning;
@@ -63,7 +63,7 @@ public:
     GameEngine(const GameEngineConfiguration& config);
 
     std::shared_ptr<Scene> CurrentScene() { return _scenes[_currentScene]; }
-    //const AssetManager& Assets() const { return _assetManager; }
+    const AssetManager& Assets() const { return _assetManager; }
     sf::RenderWindow& Window() { return _window; }
 
     template <typename T>

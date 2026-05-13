@@ -13,6 +13,9 @@ set(SOURCES main.cpp
         Sample/Components/ShooterComponent.h
         Sample/Components/BulletComponent.h
         Sample/Components/AsteroidComponent.h
+        Sample/Components/CameraComponent.h
+        Sample/Components/DefaultCameraTag.h
+        Sample/Components/FollowXCameraTag.h
         Sample/Systems/InputSystem.cpp
         Sample/Systems/InputSystem.h
         Sample/Systems/CollisionSystem.cpp
@@ -29,6 +32,8 @@ set(SOURCES main.cpp
         Sample/Systems/EntityFactory.h
         Sample/Systems/BoundariesSystem.cpp
         Sample/Systems/BoundariesSystem.h
+        Sample/Systems/DefaultCameraSystem.h
+        Sample/Systems/DefaultCameraSystem.cpp
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h
@@ -38,6 +43,7 @@ set(SOURCES main.cpp
         GameEngine/Scene.cpp
         GameEngine/Scenes/MenuScene.cpp
         GameEngine/Assets/AssetManager.cpp
+        GameEngine/Grid/Grid.cpp
         Ecs/Window/Window.cpp
         UI/Text.cpp
         UI/Button.cpp

@@ -53,7 +53,7 @@ public:
     void Render() override;
 
 private:
-    void LoadLevel(const std::string& path);
+    void LoadLevel();
 };
 
 #endif

@@ -12,7 +12,7 @@ void GameScene::Init()
     _mouseClickAction = actionMap["mouse_left"];
     _mouseMoveAction = actionMap["mouse_move"];
 
-    LoadLevel("../../Levels/level1.txt");
+    LoadLevel();
 }
 
 void GameScene::Update(float delta)
@@ -38,59 +38,59 @@ void GameScene::Render()
     window.setView(window.getDefaultView());
 }
 
-void GameScene::LoadLevel(const std::string& path)
+void GameScene::LoadLevel()
 {
-    std::ifstream file(path);
-
-    if (!file.is_open())
-    {
-        std::cerr << "Cannot open level file\n";
-        return;
-    }
-
-    std::string line;
-
+    // Get level objects from the configuration
+    const auto& levelObjects = gameEngine.Level();
+    
     auto& posStorage = world.GetStorage<PositionComponent>();
 
-    while (std::getline(file, line))
+    // Iterate through all level objects from config
+    for (const auto& obj : levelObjects)
     {
-        // пропуск пустых строк и комментариев
-        if (line.empty() || line[0] == '#')
-            continue;
+        // Convert grid coordinates to world position
+        sf::Vector2f worldPos = _grid.GridToWorld({obj.x, obj.y});
 
-        std::istringstream iss(line);
-
-        std::string name;
-        int gx, gy;
-
-        iss >> name >> gx >> gy;
-
-        sf::Vector2f worldPos = _grid.GridToWorld({gx, gy});
-
+        // Create entity
         int entity = world.CreateEntity();
 
+        // Add position component
         posStorage.Add(entity, PositionComponent(worldPos.x, worldPos.y));
 
-        // дальше можно развешивать компоненты по типу
-        if (name == "Player")
+        // Add components based on object type
+        if (obj.name == "Player")
         {
-            // tag / player component
+            // Add player tag and components
+            // Example:
+            // world.GetStorage<PlayerTag>().Add(entity, PlayerTag{});
+            // world.GetStorage<VelocityComponent>().Add(entity, VelocityComponent(0, 0));
+            // world.GetStorage<BoundingBoxComponent>().Add(entity, BoundingBoxComponent(30, 30));
         }
-        else if (name == "Tile")
+        else if (obj.name == "Tile")
         {
-            // tile component / sprite
+            // Add tile components
+            // Example:
+            // world.GetStorage<TileComponent>().Add(entity, TileComponent{});
+            // Add sprite component with tile texture
         }
-        else if (name == "Brick")
+        else if (obj.name == "Brick")
         {
-            // brick component
+            // Add brick components
+            // Example:
+            // world.GetStorage<BrickComponent>().Add(entity, BrickComponent{});
+            // world.GetStorage<DestructibleComponent>().Add(entity, DestructibleComponent{});
         }
-        else if (name == "BigHill")
+        else if (obj.name == "BigHill")
         {
-            // decoration
+            // Add decoration component for hills
+            // world.GetStorage<DecorationComponent>().Add(entity, DecorationComponent("BigHill"));
         }
-        else if (name == "Pipe1" || name == "Pipe2")
+        else if (obj.name == "Pipe1" || obj.name == "Pipe2")
         {
-            // pipe logic
+            // Add pipe components
+            // world.GetStorage<PipeComponent>().Add(entity, PipeComponent(obj.name == "Pipe1" ? 1 : 2));
         }
     }
+    
+    std::cout << "[GameScene] Loaded " << levelObjects.size() << " level objects\n";
 }

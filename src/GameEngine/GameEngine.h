@@ -8,7 +8,7 @@
 #include "Input/InputManager.h"
 
 class GameEngine {
-    const GameEngineConfiguration _config;
+    GameEngineConfiguration _config;
 
     sf::RenderWindow _window;
     sf::Clock _deltaClock;
@@ -65,6 +65,8 @@ public:
     std::shared_ptr<Scene> CurrentScene() { return _scenes[_currentScene]; }
     const AssetManager& Assets() const { return _assetManager; }
     sf::RenderWindow& Window() { return _window; }
+    const std::vector<LevelObject>& Level() const { return _config.levelObjects; }
+
 
     template <typename T>
     typename std::enable_if<std::is_base_of<Scene, T>::value, void>::type

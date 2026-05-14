@@ -17,9 +17,9 @@ void GameEngine::Render(float delta)
 
 GameEngine::GameEngine(const GameEngineConfiguration& config) : _config(config)
 {
-     _window.create(sf::VideoMode({static_cast<unsigned int>(_config.Width), static_cast<unsigned int>(_config.Height)}), "Level maker");
+     _window.create(sf::VideoMode({static_cast<unsigned int>(_config.width), static_cast<unsigned int>(_config.height)}), "Level maker");
      auto desktop = sf::VideoMode::getDesktopMode();
-    _window.setPosition({ (int) (desktop.size.x / 2 - _config.Width / 2), (int) (desktop.size.y / 2 - _config.Height / 2) });
+    _window.setPosition({ (int) (desktop.size.x / 2 - _config.width / 2), (int) (desktop.size.y / 2 - _config.height / 2) });
 
     _window.setFramerateLimit(60);
 

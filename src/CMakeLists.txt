@@ -38,11 +38,14 @@ set(SOURCES main.cpp
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h
         GameEngine/GameEngine.cpp
+        GameEngine/GameEngineConfiguration.h
         GameEngine/Input/InputManager.cpp
         GameEngine/Input/InputAction.h
         GameEngine/Scene.cpp
         GameEngine/Scenes/MenuScene.cpp
         GameEngine/Assets/AssetManager.cpp
+        GameEngine/Assets/Animation.h
+        GameEngine/Assets/Animation.cpp
         GameEngine/Grid/Grid.cpp
         Ecs/Window/Window.cpp
         UI/Text.cpp
@@ -77,7 +80,7 @@ target_include_directories(${TARGET_NAME} PRIVATE
 
 # Copy resources to build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Images DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/config.txt DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Configs DESTINATION ${CMAKE_BINARY_DIR})
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Fonts DESTINATION ${CMAKE_BINARY_DIR})
 
 # Set working directory for debugging

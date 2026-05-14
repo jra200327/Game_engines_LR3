@@ -12,7 +12,7 @@ void MenuScene::Init()
 
     sf::Vector2u size = gameEngine.Window().getSize();
     sf::Vector2f center(size.x / 2.f, size.y / 2.f);
-    auto font = gameEngine.Assets().GetFont("futura");
+    auto font = gameEngine.Assets().GetFont(AssetNames::BaseFont);
 
     const uint8_t white[3] = {255, 255, 255};
     _title = std::make_shared<Text>(font, "Level Maker", 48, white);

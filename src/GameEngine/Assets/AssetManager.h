@@ -31,7 +31,7 @@ namespace AssetNames {
     inline const std::string JumpAnim = "JumpAnim";
     
     // Шрифты
-    inline const std::string BaseFont = "BaseFont";
+    inline const std::string BaseFont = "futura";
 }
 
 class AssetManager {

@@ -14,7 +14,7 @@ void MenuScene::Init()
     sf::Vector2f center(size.x / 2.f, size.y / 2.f);
 
     const uint8_t white[3] = {255, 255, 255};
-    _title = std::make_shared<Text>("../../Fonts/futura.ttf", "Level Maker", 48, white);
+    _title = std::make_shared<Text>("../../Assets/Fonts/futura.ttf", "Level Maker", 48, white);
 
     _title->SetPosition({center.x - 120, 120.f});
 
@@ -22,7 +22,7 @@ void MenuScene::Init()
     const uint8_t playBgColor[3] = {50, 150, 50};
     const sf::Vector2f playSize = {250.f, 80.f};
 
-    _playButton = std::make_shared<Button>("../../Fonts/futura.ttf", "Play", 32, playSize, playTextColor, playBgColor);
+    _playButton = std::make_shared<Button>("../../Assets/Fonts/futura.ttf", "Play", 32, playSize, playTextColor, playBgColor);
 
     _playButton->SetPosition({center.x - playSize.x / 2.f, 300.f});
 
@@ -37,7 +37,7 @@ void MenuScene::Init()
     const uint8_t exitTextColor[3] = {255, 255, 255};
     const uint8_t exitBgColor[3] = {180, 50, 50};
 
-    _exitButton = std::make_shared<Button>("../../Fonts/futura.ttf", "Exit", 32, playSize, exitTextColor, exitBgColor);
+    _exitButton = std::make_shared<Button>("../../Assets/Fonts/futura.ttf", "Exit", 32, playSize, exitTextColor, exitBgColor);
 
     _exitButton->SetPosition({center.x - playSize.x / 2.f, 420.f});
 

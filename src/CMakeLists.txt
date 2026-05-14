@@ -34,6 +34,8 @@ set(SOURCES main.cpp
         Sample/Systems/BoundariesSystem.h
         Sample/Systems/DefaultCameraSystem.h
         Sample/Systems/DefaultCameraSystem.cpp
+        Sample/Systems/FollowXCameraSystem.h
+        Sample/Systems/FollowXCameraSystem.cpp
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h
@@ -42,8 +44,10 @@ set(SOURCES main.cpp
         GameEngine/Input/InputManager.cpp
         GameEngine/Input/InputAction.h
         GameEngine/Scene.cpp
-         GameEngine/Scenes/MenuScene.h
+        GameEngine/Scenes/MenuScene.h
         GameEngine/Scenes/MenuScene.cpp
+        GameEngine/Scenes/GameScene.h
+        GameEngine/Scenes/GameScene.cpp
         GameEngine/Assets/AssetManager.cpp
         GameEngine/Assets/Animation.h
         GameEngine/Assets/Animation.cpp

@@ -1,6 +1,7 @@
 #include "MenuScene.h"
 
 #include "../GameEngine.h"
+#include "GameScene.h"
 
 void MenuScene::Init()
 {
@@ -29,8 +30,7 @@ void MenuScene::Init()
     {
         std::cout << "Play button clicked!\n";
 
-        // TODO:
-        // gameEngine.LoadScene<GameScene>();
+        gameEngine.LoadScene<GameScene>();
     }); 
 
 

@@ -7,6 +7,7 @@
 #include "Input/InputManager.h"
 #include "SFML/Window/Keyboard.hpp"
 #include "SFML/Window/Mouse.hpp"
+#include "../Sample/Systems/EntityFactory.h"
 
 class GameEngine;
 
@@ -20,6 +21,7 @@ protected:
 
     World world;
     SystemsManager systemsManager;
+    std::shared_ptr<EntityFactory> entityFactory;
 
     void RegisterAction(sf::Keyboard::Key key, const std::string& name);
     void RegisterAction(sf::Mouse::Button btn, const std::string& name);

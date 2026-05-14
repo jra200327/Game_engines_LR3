@@ -43,8 +43,6 @@ void CollisionResolveSystem::OnUpdate()
                 int asteroid =  isAsteroid1 ? ent : other;
 
                 std::cout << "Player died" << std::endl;
-
-                _window.EndGame();
             }
         }
 

@@ -42,12 +42,12 @@ set(SOURCES main.cpp
         GameEngine/Input/InputManager.cpp
         GameEngine/Input/InputAction.h
         GameEngine/Scene.cpp
+         GameEngine/Scenes/MenuScene.h
         GameEngine/Scenes/MenuScene.cpp
         GameEngine/Assets/AssetManager.cpp
         GameEngine/Assets/Animation.h
         GameEngine/Assets/Animation.cpp
         GameEngine/Grid/Grid.cpp
-        Ecs/Window/Window.cpp
         UI/Text.cpp
         UI/Button.cpp
         Ecs/Managers/ScoreManager.cpp

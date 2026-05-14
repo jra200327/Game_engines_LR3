@@ -30,8 +30,6 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
         boxColliderStorage.Add(player1, BoxColliderComponent(24, 86));
         collisionStorage.Add(player1, CollisionComponent());
-        spriteStorage.Add(player1, SpriteComponent(sf::Vector2i(48, 32), sf::Vector2i(96, 128), _texture, -90, 2));
-        shooterStorage.Add(player1, ShooterComponent(_shootSpeed));
     }
     else if(type == EntityType::Bullet)
     {
@@ -47,7 +45,6 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         movementsStorage.Add(bullet, MovementComponent(50, sf::Vector2f(0, -1)));
         boxColliderStorage.Add(bullet, BoxColliderComponent(8, 8));
         collisionStorage.Add(bullet, CollisionComponent());
-        spriteStorage.Add(bullet, SpriteComponent(sf::Vector2i(16, 16), sf::Vector2i(224, 144), _texture, -90, 2));
         bulletStorage.Add(bullet, BulletComponent());
     }
     else if(type == EntityType::Asteroid)
@@ -77,15 +74,9 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
             atlPos = sf::Vector2i(96, 80);
         }
 
-        float randomXDir = RandomFloat(-_offset, _offset);
-        float randomSpeed = RandomFloat(_minSpeed, _maxSpeed);
-        float randomSize = RandomFloat(_minSize, _maxSize);
 
         positionsStorage.Add(asteroid, PositionComponent(pos.x, pos.y));
-        movementsStorage.Add(asteroid, MovementComponent(randomSpeed, sf::Vector2f(randomXDir, 1)));
-        circleColliderStorage.Add(asteroid, CircleColliderComponent(randomSize*0.7*48));
         collisionStorage.Add(asteroid, CollisionComponent());
-        spriteStorage.Add(asteroid, SpriteComponent(sf::Vector2i(48, 48), atlPos, _texture, 0, randomSize));
         asteroidStorage.Add(asteroid, AsteroidComponent());
     }
     else if(type == EntityType::DefaultCamera)
@@ -96,29 +87,4 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         cameraStorage.Add(camera, CameraComponent(sf::View(sf::FloatRect({0.f, 0.f}, {pos.x, pos.y}))));
         defaultCameraStorage.Add(camera, DefaultCameraTag());
     }
-}
-
-float EntityFactory::RandomFloat(float min, float max)
-{
-    if (max > min)
-    {
-        std::random_device rng;
-        std::mt19937 gen(rng());
-        std::uniform_real_distribution<float> dist(min, max);
-        return dist(rng);
-    }
-    else
-    {
-        return max;
-    }
-}
-
-float& EntityFactory::GetMinSpeed()
-{
-    return _minSpeed;
-}
-
-float& EntityFactory::GetMaxSpeed()
-{
-    return _maxSpeed;
 }

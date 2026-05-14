@@ -2,11 +2,6 @@
 
 #include "../GameEngine.h"
 
-MenuScene::MenuScene(GameEngine& engine)
-    : Scene(engine)
-{
-}
-
 void MenuScene::Init()
 {
     RegisterAction(sf::Mouse::Button::Left, "mouse_left");
@@ -52,6 +47,10 @@ void MenuScene::Init()
 
         gameEngine.Quit();
     });
+    entityFactory = std::make_shared<EntityFactory>(world);
+
+    sf::Vector2f sizeF(static_cast<float>(size.x), static_cast<float>(size.y));
+    entityFactory->CreateEntity(EntityType::DefaultCamera, sizeF);
 }
 
 void MenuScene::Update(float delta)
@@ -64,6 +63,13 @@ void MenuScene::Render()
 {
     auto& window = gameEngine.Window();
 
+    for (const auto ent : _camera)
+    {
+        auto& cam = _cameraComponents.Get(ent);
+        window.setView(cam.View);
+    }
+
+    window.setView(window.getDefaultView());
     _title->Draw(window);
 
     _playButton->Draw(window);

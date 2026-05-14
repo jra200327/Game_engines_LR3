@@ -1,4 +1,5 @@
 #include "GameEngine.h"
+#include "Assets/AssetManager.h"
 #include "Scenes/MenuScene.h"
 #include <imgui-SFML.h>
 #include <imgui.h>
@@ -30,6 +31,7 @@ GameEngine::GameEngine(const GameEngineConfiguration& config) : _config(config)
 
 void GameEngine::Initialize()
 {
+    _assetManager.LoadFromFile("../../Configs/assets.txt");
     LoadScene<MenuScene>();
 }
 

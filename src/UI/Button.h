@@ -28,7 +28,7 @@ public:
     Button() = default;
 
     Button(
-        const std::filesystem::path& fontPath,
+        const sf::Font& font,
         const sf::String& text,
         int fontSize,
         const sf::Vector2f& size,

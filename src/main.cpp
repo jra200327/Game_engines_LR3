@@ -7,6 +7,7 @@
 
 int main() {
     GameEngineConfiguration config;
+    config.LoadFromFile("../../Configs/config.txt");
     GameEngine engine(config);
     engine.Run();
 

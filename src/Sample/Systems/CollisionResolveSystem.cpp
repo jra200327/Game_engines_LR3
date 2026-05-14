@@ -35,7 +35,6 @@ void CollisionResolveSystem::OnUpdate()
                 toDestroy.push_back(asteroid);
 
                 std::cout << "Bullet hit asteroid" << std::endl;
-                _scoreManager.UpdateScore(100);
             }
             else if ((isShooter1 && isAsteroid2) || (isAsteroid1 && isShooter2))
             {

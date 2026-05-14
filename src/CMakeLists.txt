@@ -54,8 +54,6 @@ set(SOURCES main.cpp
         GameEngine/Grid/Grid.cpp
         UI/Text.cpp
         UI/Button.cpp
-        Ecs/Managers/ScoreManager.cpp
-        Ecs/Managers/RestartManager.cpp
 )
 
 add_subdirectory(Ecs)
@@ -84,7 +82,9 @@ target_include_directories(${TARGET_NAME} PRIVATE
 
 # Copy resources to build directory
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Images DESTINATION ${CMAKE_BINARY_DIR})
-file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Configs DESTINATION ${CMAKE_BINARY_DIR})
+file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Configs 
+     DESTINATION ${CMAKE_BINARY_DIR}
+     FILES_MATCHING PATTERN "*")
 file(COPY ${CMAKE_CURRENT_SOURCE_DIR}/Assets DESTINATION ${CMAKE_BINARY_DIR})
 
 # Set working directory for debugging

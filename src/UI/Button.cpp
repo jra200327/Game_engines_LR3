@@ -3,24 +3,15 @@
 #include <iostream>
 
 Button::Button(
-    const std::filesystem::path& fontPath,
+    const sf::Font& font,
     const sf::String& text,
     int fontSize,
     const sf::Vector2f& size,
     const uint8_t textColor[3],
     const uint8_t backgroundColor[3])
-    : _str(text)
+    : _str(text), _font(font)
 {
-    if (!_font.openFromFile(fontPath))
-    {
-        std::cerr << "Could not load font!\n";
-        std::exit(-1);
-    }
-
-    _text = sf::Text(
-        _font,
-        _str,
-        fontSize);
+    _text = sf::Text(_font, _str, fontSize);
 
     _text.setFillColor(
         sf::Color(

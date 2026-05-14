@@ -6,7 +6,6 @@ set(SOURCES World/World.cpp
         Filter/Filter.cpp
         Entity/EntityId.cpp
         Systems/SystemsManager.cpp
-        ReadConfig/ReadConfig.cpp
 )
 
 add_library(${LIB_NAME}

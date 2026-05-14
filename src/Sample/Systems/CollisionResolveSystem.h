@@ -4,8 +4,6 @@
 #include "../../Ecs/Filter/Filter.h"
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include "../../Ecs/Systems/ISystem.h"
-#include "../../Ecs/Managers/ScoreManager.h"
-#include "../../Ecs/Managers/RestartManager.h"
 
 #include "../Components/CollisionComponent.h"
 #include "../Components/ShooterComponent.h"
@@ -13,7 +11,6 @@
 #include "../Components/BulletComponent.h"
 
 class CollisionResolveSystem final : public ISystem {
-    ScoreManager& _scoreManager;
     
     ComponentStorage<CollisionComponent>& _collisionComponents;
     ComponentStorage<ShooterComponent>& _shooterComponents;
@@ -23,9 +20,8 @@ class CollisionResolveSystem final : public ISystem {
     Filter _collideables;
 
 public:
-    CollisionResolveSystem(World &world, ScoreManager &score)
+    CollisionResolveSystem(World &world)
         : ISystem(world),
-            _scoreManager(score),
             _collisionComponents(world.GetStorage<CollisionComponent>()),
             _shooterComponents(world.GetStorage<ShooterComponent>()),
             _asteroidComponents(world.GetStorage<AsteroidComponent>()),

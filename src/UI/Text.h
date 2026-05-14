@@ -21,7 +21,7 @@ public:
     Text() = default;
     Text(const Text &other);
     Text(Text &&other);
-    Text(const std::filesystem::path& fontPath, const sf::String text, const int fontSize, const uint8_t fontColor[3]);
+    Text(const sf::Font& font, const sf::String text, const int fontSize, const uint8_t fontColor[3]);
 
     const int GetCharacterSize() const;
     void SetPosition(const sf::Vector2f position);

@@ -10,17 +10,9 @@ Text::Text(Text &&other)
     Transfer(other);
 }
 
-Text::Text(const std::filesystem::path& fontPath, const sf::String text, const int fontSize, const uint8_t fontColor[3]) :
-_str(text)
+Text::Text(const sf::Font& font, const sf::String text, const int fontSize, const uint8_t fontColor[3]) :
+_str(text), _font(font)
 {
-    if (!_font.openFromFile(fontPath))
-    {
-        std::cerr << "Could not load font!\n";
-        exit(-1);
-    }
-
-    std::cout << _str.toAnsiString();
-
     _text = sf::Text(_font, _str, fontSize);
     _text.setFillColor(sf::Color(fontColor[0], fontColor[1], fontColor[2]));
 }

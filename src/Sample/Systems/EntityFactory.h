@@ -4,7 +4,6 @@
 #include <SFML/Graphics.hpp>
 
 #include "../../Ecs/World/World.h"
-#include "../../Ecs/ReadConfig/ReadConfig.h"
 
 enum class EntityType
 {

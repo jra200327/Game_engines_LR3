@@ -53,7 +53,7 @@ void MenuScene::Init()
     entityFactory = std::make_shared<EntityFactory>(world, gameEngine.Assets());
 
     sf::Vector2f sizeF(static_cast<float>(size.x), static_cast<float>(size.y));
-    entityFactory->CreateEntity(EntityType::DefaultCamera, sizeF);
+    entityFactory->CreateEntity("DefaultCamera", sizeF);
 
     systemsManager.AddSystem(std::make_shared<DefaultCameraSystem>(world));
 

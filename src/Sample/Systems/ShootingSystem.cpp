@@ -16,7 +16,7 @@ void ShootingSystem::OnUpdate()
 
             if(shoot.timer <= 0)
             {
-                _factory.CreateEntity(EntityType::Bullet, sf::Vector2f(position.X, position.Y));
+                _factory.CreateEntity("Bullet", sf::Vector2f(position.X, position.Y));
                 shoot.timer = shoot.cd;
                 std::cout << "Pew" << std::endl;;
             }

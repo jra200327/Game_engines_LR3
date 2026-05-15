@@ -6,25 +6,6 @@
 #include "../../Ecs/World/World.h"
 #include "../../GameEngine/Assets/AssetManager.h"
 
-enum class EntityType
-{
-    Player,
-    Bullet,
-    DefaultCamera,
-    FollowXCamera,
-    Tile,
-    Tile1,
-    BrickTile,
-    QuestionTile,
-    QuestionInactiveTile,
-    PipeUpLeft,
-    PipeUpRight,
-    PipeLeft,
-    PipeRight,
-    BigHill,
-    Finish
-};
-
 class EntityFactory  {
     
    World &_world;
@@ -37,7 +18,7 @@ public:
     {
     }
 
-    void CreateEntity(EntityType type, sf::Vector2f pos);
+    void CreateEntity(std::string name, sf::Vector2f pos);
 };
 
 #endif //ENTITYFACTORY_H

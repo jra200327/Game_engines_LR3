@@ -14,9 +14,9 @@
 #include "../Components/FollowXCameraTag.h"
 #include <random>
 
-void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
+void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
 {
-    if (type == EntityType::Player)
+    if (name == "Player")
     {
         const int player1 = _world.CreateEntity();
         auto& positionsStorage = _world.GetStorage<PositionComponent>();
@@ -33,7 +33,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f, true));
         shooterStorage.Add(player1, ShooterComponent(1));
     }
-    else if(type == EntityType::Bullet)
+    else if(name == "Bullet")
     {
         const int bullet = _world.CreateEntity();
         auto& positionsStorage = _world.GetStorage<PositionComponent>();
@@ -49,7 +49,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         collisionStorage.Add(bullet, CollisionComponent());
         bulletStorage.Add(bullet, BulletComponent());
     }
-     else if (type == EntityType::Tile)
+     else if (name == AssetNames::Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -58,7 +58,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile), 0.f, 1.f));
     }
-    else if (type == EntityType::Tile1)
+    else if (name == AssetNames::Tile1)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -67,7 +67,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile1), 0.f, 1.f));
     }
-    else if (type == EntityType::BrickTile)
+    else if (name == AssetNames::Brick_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -76,7 +76,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Brick_Tile), 0.f, 1.f));
     }
-    else if (type == EntityType::QuestionTile)
+    else if (name == AssetNames::Question_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -85,7 +85,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Tile), 0.f, 1.f));
     }
-    else if (type == EntityType::QuestionInactiveTile)
+    else if (name == AssetNames::Question_Inactive_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -94,7 +94,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Inactive_Tile), 0.f, 1.f));
     }
-    else if (type == EntityType::PipeUpLeft)
+    else if (name == AssetNames::Pipe_Up_L)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -103,7 +103,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_L), 0.f, 1.f));
     }
-    else if (type == EntityType::PipeUpRight)
+    else if (name == AssetNames::Pipe_Up_R)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -112,7 +112,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_R), 0.f, 1.f));
     }
-    else if (type == EntityType::PipeLeft)
+    else if (name == AssetNames::Pipe_L)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -121,7 +121,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_L), 0.f, 1.f));
     }
-    else if (type == EntityType::PipeRight)
+    else if (name == AssetNames::Pipe_R)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -130,7 +130,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_R), 0.f, 1.f));
     }
-    else if (type == EntityType::BigHill)
+    else if (name == AssetNames::BigHill)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -139,7 +139,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({320, 192}, {0, 0}, _assets.GetTexture(AssetNames::BigHill), 0.f, 1.f));
     }
-    else if (type == EntityType::Finish)
+    else if (name == AssetNames::Finish)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
@@ -148,7 +148,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 128}, {0, 0}, _assets.GetTexture(AssetNames::Finish), 0.f, 1.f));
     }
-    else if (type == EntityType::DefaultCamera)
+    else if (name == "DefautlCamera")
     {
         int e = _world.CreateEntity();
         auto& cam = _world.GetStorage<CameraComponent>();
@@ -157,7 +157,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         cam.Add(e, CameraComponent(sf::View(sf::FloatRect({0.f, 0.f}, {pos.x, pos.y}))));
         tag.Add(e, DefaultCameraTag());
     }
-    else if (type == EntityType::FollowXCamera)
+    else if (name == "FollowXCamera")
     {
         int e = _world.CreateEntity();
         auto& cam = _world.GetStorage<CameraComponent>();

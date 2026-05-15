@@ -19,6 +19,7 @@ set(SOURCES main.cpp
         Sample/Components/FollowXCameraTag.h
         Sample/Components/AnimationComponent.h
         Sample/Components/JumpComponent.h
+        Sample/Components/ObjectComponent.h
         Sample/Systems/InputSystem.cpp
         Sample/Systems/InputSystem.h
         Sample/Systems/CollisionSystem.cpp

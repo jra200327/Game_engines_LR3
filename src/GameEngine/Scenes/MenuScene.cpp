@@ -1,7 +1,6 @@
 #include "MenuScene.h"
 
 #include "../GameEngine.h"
-#include "GameScene.h"
 
 #include "../../Sample/Systems/DefaultCameraSystem.h"
 

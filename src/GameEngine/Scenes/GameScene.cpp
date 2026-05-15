@@ -18,11 +18,13 @@ void GameScene::Init()
     RegisterAction(sf::Keyboard::Key::D, "move_right");
     RegisterAction(sf::Keyboard::Key::W, "jump");
     RegisterAction(sf::Keyboard::Key::Space, "shoot");
+    RegisterAction(sf::Keyboard::Key::Escape, "exit");
 
     _actions["move_left"] = actionMap["move_left"];
     _actions["move_right"] = actionMap["move_right"];
     _actions["jump"] = actionMap["jump"];
     _actions["shoot"] = actionMap["shoot"];
+    _actions["exit"] = actionMap["exit"];
 
     entityFactory = std::make_shared<EntityFactory>(world, gameEngine.Assets());
 
@@ -46,6 +48,10 @@ void GameScene::Init()
 
 void GameScene::Update(float delta)
 {
+    if(_actions["exit"]->Type() == ActionType::Start)
+    {
+        gameEngine.LoadScene<MenuScene>();
+    }
     systemsManager.Update();
 }
 

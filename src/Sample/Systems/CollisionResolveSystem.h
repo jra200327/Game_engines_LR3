@@ -13,6 +13,7 @@
 #include "../Components/PositionComponent.h"
 #include "../Components/GravityComponent.h"
 #include "../Components/MovementComponent.h"
+#include "../Components/ObjectComponent.h"
 
 class CollisionResolveSystem final : public ISystem {
     
@@ -24,6 +25,7 @@ class CollisionResolveSystem final : public ISystem {
     ComponentStorage<PositionComponent>& _positionComponents;
     ComponentStorage<GravityComponent>& _gravityComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
+    ComponentStorage<ObjectComponent>& _objectComponents;
 
     Filter _collideables;
 
@@ -38,6 +40,7 @@ public:
             _positionComponents(world.GetStorage<PositionComponent>()),
             _gravityComponents(world.GetStorage<GravityComponent>()),
             _movementComponents(world.GetStorage<MovementComponent>()),
+            _objectComponents(world.GetStorage<ObjectComponent>()),
             _collideables(FilterBuilder(world)
                 .With<CollisionComponent>()
                 .Build())

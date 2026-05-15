@@ -23,17 +23,31 @@ void CollisionResolveSystem::OnUpdate()
 
             if (!world.IsEntityAlive(ent) || !world.IsEntityAlive(other))
                 continue;
-
-            bool playerBulletCollision = (_shooterComponents.Has(ent) && _bulletComponents.Has(other)) ||
-                (_bulletComponents.Has(ent) && _shooterComponents.Has(other));
-
-            if (playerBulletCollision)
-                continue;
             
-            bool isPlayer = _shooterComponents.Has(ent);
-            bool isWorld  = _boxColliderComponents.Has(other);
+            bool isPlayer1 = _shooterComponents.Has(ent);
+            bool isBullet1 = _bulletComponents.Has(ent);
+            bool isWorld1 = _objectComponents.Has(ent);
 
-            if (!isPlayer || !isWorld)
+            bool isPlayer2 = _shooterComponents.Has(other);
+            bool isBullet2 = _bulletComponents.Has(other);
+            bool isWorld2  = _objectComponents.Has(other);
+
+            if ((isPlayer1 && isBullet2) || (isBullet1 && isPlayer2))
+                continue;
+
+            if ((isWorld1 && isBullet2) || (isBullet1 && isWorld2))
+            {
+                int bullet   = isBullet1 ? ent   : other;
+                int world = isWorld1 ? ent : other;
+
+                toDestroy.push_back(bullet);
+
+                auto& object = _objectComponents.Get(world);
+                if(object.destroyable)
+                    toDestroy.push_back(world);
+            }
+
+            if (!isPlayer1 || !isWorld2)
                 continue;
 
             auto& pos = _positionComponents.Get(ent);

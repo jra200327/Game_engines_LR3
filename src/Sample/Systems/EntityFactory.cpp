@@ -15,6 +15,7 @@
 #include "../Components/FollowXCameraTag.h"
 #include "../Components/AnimationComponent.h"
 #include "../Components/JumpComponent.h"
+#include "../Components/ObjectComponent.h"
 #include "../../Ecs/Filter/Filter.h"
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include <random>
@@ -95,10 +96,10 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         
         positionsStorage.Add(bullet, PositionComponent(pos.x, pos.y));
         movementsStorage.Add(bullet, MovementComponent(20, sf::Vector2f(xdir, 0)));
-        boxColliderStorage.Add(bullet, BoxColliderComponent(8, 8));
+        boxColliderStorage.Add(bullet, BoxColliderComponent(16, 16));
         collisionStorage.Add(bullet, CollisionComponent());
         bulletStorage.Add(bullet, BulletComponent());
-        spriteStorage.Add(bullet, SpriteComponent({8, 8}, {0, 0}, _assets.GetTexture(AssetNames::Bullet), 0.f, 1.f));
+        spriteStorage.Add(bullet, SpriteComponent({8, 8}, {0, 0}, _assets.GetTexture(AssetNames::Bullet), 0.f, 2.f));
     }
      else if (name == AssetNames::Tile)
     {
@@ -107,11 +108,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Tile1)
     {
@@ -120,11 +123,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile1), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Brick_Tile)
     {
@@ -133,11 +138,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Brick_Tile), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(true));
     }
     else if (name == AssetNames::Question_Tile)
     {
@@ -146,11 +153,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Tile), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Question_Inactive_Tile)
     {
@@ -159,11 +168,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Inactive_Tile), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Pipe_Up_L)
     {
@@ -172,11 +183,14 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
+        objectStorage.Add(e, ObjectComponent(false));
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_L), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Pipe_Up_R)
     {
@@ -185,11 +199,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_R), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Pipe_L)
     {
@@ -198,11 +214,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_L), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::Pipe_R)
     {
@@ -211,11 +229,13 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& s = _world.GetStorage<SpriteComponent>();
         auto& collisionStorage = _world.GetStorage<CollisionComponent>();
         auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_R), 0.f, 1.f));
         collisionStorage.Add(e, CollisionComponent());
         boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
+        objectStorage.Add(e, ObjectComponent(false));
     }
     else if (name == AssetNames::BigHill)
     {

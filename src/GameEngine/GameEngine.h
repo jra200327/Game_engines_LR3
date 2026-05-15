@@ -7,6 +7,9 @@
 #include "Assets/AssetManager.h"
 #include "Input/InputManager.h"
 
+#include "Scenes/MenuScene.h"
+#include "Scenes/GameScene.h"
+
 class GameEngine {
     GameEngineConfiguration _config;
 

@@ -1,5 +1,7 @@
 Textures:
   TexRun ../../Assets/Animations/MegaRun.png
+  TexIdle ../../Assets/Animations/MegaIdle.png
+  TexJump ../../Assets/Animations/MegaJump.png
   Tile ../../Assets/Textures/tile.png
   Tile1 ../../Assets/Textures/tile1.png
   Brick_Tile ../../Assets/Textures/brick_tile.png
@@ -13,8 +15,8 @@ Textures:
   BigHill ../../Assets/Textures/hillBig.png
   SmallHill ../../Assets/Textures/hillSmall.png
 Animations:
-  RunAnim TexRun 3 10
-  IdleAnim TexRun 1 1
-  JumpAnim TexRun 5 8
+  RunAnim TexRun 3 5
+  IdleAnim TexIdle 3 10
+  JumpAnim TexJump 1 10
 Fonts:
   futura ../../Assets/Fonts/futura.ttf

@@ -14,6 +14,8 @@
 namespace AssetNames {
     // Текстуры
     inline const std::string TexRun = "TexRun";
+    inline const std::string TexIdle = "TexIdle";
+    inline const std::string TexJump = "TexJump";
     inline const std::string Tile = "Tile";
     inline const std::string Tile1 = "Tile1";
     inline const std::string Brick_Tile = "Brick_Tile";

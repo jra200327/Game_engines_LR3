@@ -9,6 +9,7 @@
 #include "../../Sample/Systems/CollisionSystem.h"
 #include "../../Sample/Systems/CollisionResolveSystem.h"
 #include "../../Sample/Systems/GroundedResetSystem.h"
+#include "../../Sample/Systems/AnimationSystem.h"
 
 void GameScene::Init()
 {
@@ -28,6 +29,7 @@ void GameScene::Init()
     _render = std::make_shared<RenderSystem>(world, gameEngine.Window());
     systemsManager.AddSystem(std::make_shared<FollowXCameraSystem>(world));
     systemsManager.AddSystem(std::make_shared<GroundedResetSystem>(world));
+     systemsManager.AddSystem(std::make_shared<AnimationSystem>(world));
     systemsManager.AddSystem(std::make_shared<MovementSystem>(world, _actions));
     systemsManager.AddSystem(std::make_shared<CollisionSystem>(world));
     systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world));

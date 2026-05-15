@@ -13,6 +13,7 @@
 #include "../Components/CameraComponent.h"
 #include "../Components/DefaultCameraTag.h"
 #include "../Components/FollowXCameraTag.h"
+#include "../Components/AnimationComponent.h"
 #include <random>
 
 void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
@@ -27,6 +28,7 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& spriteStorage = _world.GetStorage<SpriteComponent>();
         auto& shooterStorage = _world.GetStorage<ShooterComponent>();
         auto& gravityStorage = _world.GetStorage<GravityComponent>();
+        auto& animationStorage = _world.GetStorage<AnimationComponent>();
 
         positionsStorage.Add(player1, PositionComponent(pos.x, pos.y));
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
@@ -35,6 +37,21 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
         shooterStorage.Add(player1, ShooterComponent(1));
         gravityStorage.Add(player1, GravityComponent());
+
+        AnimationComponent anims;
+        std::cout << "[DEBUG] idle tex addr = "
+          << &_assets.GetTexture(AssetNames::TexIdle) << std::endl;
+
+        Animation idleAnim = _assets.GetAnimation(AssetNames::IdleAnim);
+
+        anims.Animations.emplace(AssetNames::IdleAnim, idleAnim);
+        //anims.Animations.emplace(AssetNames::RunAnim, Animation(_assets.GetTexture(AssetNames::RunAnim), 6, 6));
+        //anims.Animations.emplace(AssetNames::JumpAnim, Animation(_assets.GetTexture(AssetNames::JumpAnim), 2, 10));
+
+        anims.CurrentAnimation = AssetNames::IdleAnim;
+
+        animationStorage.Add(player1, anims);
+
     }
     else if(name == "Bullet")
     {

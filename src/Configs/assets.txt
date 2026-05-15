@@ -16,7 +16,7 @@ Textures:
   SmallHill ../../Assets/Textures/hillSmall.png
 Animations:
   RunAnim TexRun 3 5
-  IdleAnim TexIdle 3 10
+  IdleAnim TexIdle 3 20
   JumpAnim TexJump 1 10
 Fonts:
   futura ../../Assets/Fonts/futura.ttf

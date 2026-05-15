@@ -43,10 +43,12 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
           << &_assets.GetTexture(AssetNames::TexIdle) << std::endl;
 
         Animation idleAnim = _assets.GetAnimation(AssetNames::IdleAnim);
+        Animation runAnim = _assets.GetAnimation(AssetNames::RunAnim);
+        Animation jumpAnim = _assets.GetAnimation(AssetNames::JumpAnim);
 
         anims.Animations.emplace(AssetNames::IdleAnim, idleAnim);
-        //anims.Animations.emplace(AssetNames::RunAnim, Animation(_assets.GetTexture(AssetNames::RunAnim), 6, 6));
-        //anims.Animations.emplace(AssetNames::JumpAnim, Animation(_assets.GetTexture(AssetNames::JumpAnim), 2, 10));
+        anims.Animations.emplace(AssetNames::RunAnim, runAnim);
+        anims.Animations.emplace(AssetNames::JumpAnim, jumpAnim);
 
         anims.CurrentAnimation = AssetNames::IdleAnim;
 

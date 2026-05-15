@@ -40,6 +40,8 @@ set(SOURCES main.cpp
         Sample/Systems/GroundedResetSystem.cpp
         Sample/Systems/AnimationSystem.h
         Sample/Systems/AnimationSystem.cpp
+         Sample/Systems/PlayerAnimationSystem.h
+        Sample/Systems/PlayerAnimationSystem.cpp
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h

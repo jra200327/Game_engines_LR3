@@ -20,7 +20,6 @@ struct SpriteComponent
     {
         sprite = std::make_shared<sf::Sprite>(tex);
         sprite->setTextureRect(sf::IntRect(atlasPos, size));
-        sprite->setOrigin(sf::Vector2f(size.x/2, size.y/2));
         sprite->rotate(sf::degrees(rotation));
         sprite->setScale(sf::Vector2f(scale,scale));
     }

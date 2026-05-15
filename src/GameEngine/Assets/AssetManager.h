@@ -24,6 +24,7 @@ namespace AssetNames {
     inline const std::string Pipe_R = "Pipe_R";
     inline const std::string Pipe_Up_L = "Pipe_Up_L";
     inline const std::string Finish = "Finish";
+    inline const std::string BigHill = "BigHill";
     
     // Анимации
     inline const std::string RunAnim = "RunAnim";

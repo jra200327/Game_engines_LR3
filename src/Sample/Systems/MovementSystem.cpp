@@ -16,32 +16,21 @@ void MovementSystem::OnUpdate()
 {
         for (const auto ent : _player)
         {
-            auto& position = _positionComponents.Get(ent);
             auto& movement = _movementComponents.Get(ent);
 
-            if(!(_moveInputEvents.begin()==_moveInputEvents.end()))
-            {
-                for (const auto eventEntity : _moveInputEvents)
-                {
-                    auto& event = _moveInputEventComponents.Get(eventEntity);
+            movement.Direction.x = 0.f;
 
-                    if(event.Direction == MoveDirection::Right)
-                    {
-                        movement.Direction.x = -1;
-                    }
-                    else if (event.Direction == MoveDirection::Left)
-                    {
-                        movement.Direction.x = 1;
-                    }
+            if (_actions["move_left"]->Type() == ActionType::Start)
+                 movement.Direction.x -= 1.f;
 
-                    world.RemoveEntity(eventEntity);
-                }
-            }
-            else 
+            if (_actions["move_right"]->Type() == ActionType::Start)
+                 movement.Direction.x += 1.f;
+
+            if (_actions["jump"]->Type() == ActionType::Start)
             {
-                movement.Direction.x = 0;
             }
 
+            Print(ent);
         }
 
     for (const auto ent : _moveables)

@@ -11,7 +11,6 @@
 #include "../Components/SpriteComponent.h"
 
 class RenderSystem final : public ISystem {
-    sf::Texture& _atlas;
     sf::RenderWindow& _window;
 
     ComponentStorage<PositionComponent>& _positionComponents;
@@ -20,10 +19,9 @@ class RenderSystem final : public ISystem {
     Filter _drawables;
 
 public:
-    RenderSystem(World &world, sf::RenderWindow &window, sf::Texture &texture)
+    RenderSystem(World &world, sf::RenderWindow &window)
         : ISystem(world),
             _window(window),
-            _atlas(texture),
             _positionComponents(world.GetStorage<PositionComponent>()),
             _spriteComponents(world.GetStorage<SpriteComponent>()),
             _drawables(FilterBuilder(world)

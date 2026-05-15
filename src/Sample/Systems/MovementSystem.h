@@ -5,39 +5,36 @@
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include "../../Ecs/Systems/ISystem.h"
 
-#include "../Components/MoveInputEvent.h"
 #include "../Components/PositionComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Components/ShooterComponent.h"
+#include "../../GameEngine/Input/InputManager.h"
 
 class MovementSystem final : public ISystem {
     ComponentStorage<PositionComponent>& _positionComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
-    ComponentStorage<MoveInputEvent>& _moveInputEventComponents;
 
     Filter _moveables;
     Filter _player;
-    Filter _moveInputEvents;
+
+    std::unordered_map<std::string, std::shared_ptr<InputAction>>& _actions;
 
     void Print(int ent);  // Это тоже можно вынести в отдельную систему
 
 public:
-    MovementSystem(World &world)
+    MovementSystem(World &world, std::unordered_map<std::string, std::shared_ptr<InputAction>>& actions)
         : ISystem(world),
+            _actions(actions),
             _positionComponents(world.GetStorage<PositionComponent>()),
             _movementComponents(world.GetStorage<MovementComponent>()),
-            _moveInputEventComponents(world.GetStorage<MoveInputEvent>()),
-            _moveables(FilterBuilder(world)
-                .With<PositionComponent>()
-                .With<MovementComponent>()
-                .Build()),
-            _moveInputEvents(FilterBuilder(world)
-                .With<MoveInputEvent>()
-                .Build()),
             _player(FilterBuilder(world)
                 .With<PositionComponent>()
                 .With<MovementComponent>()
                 .With<ShooterComponent>()
+                .Build()),
+            _moveables(FilterBuilder(world)
+                .With<PositionComponent>()
+                .With<MovementComponent>()
                 .Build())
     {
     }

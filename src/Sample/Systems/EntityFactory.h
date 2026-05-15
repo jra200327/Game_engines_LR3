@@ -4,23 +4,36 @@
 #include <SFML/Graphics.hpp>
 
 #include "../../Ecs/World/World.h"
+#include "../../GameEngine/Assets/AssetManager.h"
 
 enum class EntityType
 {
     Player,
-    Asteroid,
     Bullet,
     DefaultCamera,
-    FollowXCamera
+    FollowXCamera,
+    Tile,
+    Tile1,
+    BrickTile,
+    QuestionTile,
+    QuestionInactiveTile,
+    PipeUpLeft,
+    PipeUpRight,
+    PipeLeft,
+    PipeRight,
+    BigHill,
+    Finish
 };
 
 class EntityFactory  {
     
    World &_world;
+   const AssetManager &_assets;
 
 public:
-    EntityFactory (World &wrld)
-        : _world(wrld)
+    EntityFactory (World &wrld, const AssetManager& assets)
+        : _world(wrld),
+        _assets(assets)
     {
     }
 

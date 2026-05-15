@@ -1,5 +1,9 @@
 #include "FollowXCameraSystem.h"
 
+void FollowXCameraSystem::OnInit()
+{
+}
+
 void FollowXCameraSystem::OnUpdate()
 {
     for (const auto ent : _followCameras)

@@ -41,6 +41,7 @@ public:
     }
 
     void OnUpdate() override;
+    void OnInit() override;
 };
 
 #endif

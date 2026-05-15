@@ -1,5 +1,9 @@
 #include "DefaultCameraSystem.h"
 
+void DefaultCameraSystem::OnInit()
+{
+}
+
 void DefaultCameraSystem::OnUpdate()
 {
     for (const auto ent : _defaultCameras)

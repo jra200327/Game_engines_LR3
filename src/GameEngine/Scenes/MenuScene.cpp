@@ -3,6 +3,8 @@
 #include "../GameEngine.h"
 #include "GameScene.h"
 
+#include "../../Sample/Systems/DefaultCameraSystem.h"
+
 void MenuScene::Init()
 {
     RegisterAction(sf::Mouse::Button::Left, "mouse_left");
@@ -48,14 +50,19 @@ void MenuScene::Init()
 
         gameEngine.Quit();
     });
-    entityFactory = std::make_shared<EntityFactory>(world);
+    entityFactory = std::make_shared<EntityFactory>(world, gameEngine.Assets());
 
     sf::Vector2f sizeF(static_cast<float>(size.x), static_cast<float>(size.y));
     entityFactory->CreateEntity(EntityType::DefaultCamera, sizeF);
+
+    systemsManager.AddSystem(std::make_shared<DefaultCameraSystem>(world));
+
+    systemsManager.Initialize();
 }
 
 void MenuScene::Update(float delta)
 {
+    systemsManager.Update();
     _playButton->Update(_mouseClickAction);
     _exitButton->Update(_mouseClickAction);
 }

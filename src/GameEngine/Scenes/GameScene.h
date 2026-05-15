@@ -16,12 +16,15 @@
 #include "../../Sample/Components/CameraComponent.h"
 #include "../../Sample/Components/FollowXCameraTag.h"
 
+#include "../../Sample/Systems/RenderSystem.h"
+
 #include "../Grid/Grid.h"
 
 class GameScene : public Scene
 {
-    std::shared_ptr<InputAction> _mouseClickAction;
-    std::shared_ptr<InputAction> _mouseMoveAction;
+    std::unordered_map<std::string, std::shared_ptr<InputAction>> _actions;
+
+    std::shared_ptr<RenderSystem> _render;
 
     Grid _grid;
 

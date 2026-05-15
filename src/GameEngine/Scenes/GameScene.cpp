@@ -3,20 +3,38 @@
 #include "../GameEngine.h"
 #include <iostream>
 
+#include "../../Sample/Systems/RenderSystem.h"
+#include "../../Sample/Systems/FollowXCameraSystem.h"
+#include "../../Sample/Systems/MovementSystem.h"
+
 void GameScene::Init()
 {
+    RegisterAction(sf::Keyboard::Key::A, "move_left");
+    RegisterAction(sf::Keyboard::Key::D, "move_right");
+    RegisterAction(sf::Keyboard::Key::W, "jump");
 
-    RegisterAction(sf::Mouse::Button::Left, "mouse_left");
-    RegisterAction(MouseMove::Move, "mouse_move");
+    _actions["move_left"] = actionMap["move_left"];
+    _actions["move_right"] = actionMap["move_right"];
+    _actions["jump"] = actionMap["jump"];
 
-    _mouseClickAction = actionMap["mouse_left"];
-    _mouseMoveAction = actionMap["mouse_move"];
+    entityFactory = std::make_shared<EntityFactory>(world, gameEngine.Assets());
+
+    sf::Vector2u size = gameEngine.Window().getSize();
+    sf::Vector2f sizeF(static_cast<float>(size.x), static_cast<float>(size.y));
+    entityFactory->CreateEntity(EntityType::FollowXCamera, sizeF);
+    _render = std::make_shared<RenderSystem>(world, gameEngine.Window());
+    systemsManager.AddSystem(std::make_shared<FollowXCameraSystem>(world));
+    systemsManager.AddSystem(std::make_shared<MovementSystem>(world, _actions));
+    
+    _render->OnInit();
+    systemsManager.Initialize();
 
     LoadLevel();
 }
 
 void GameScene::Update(float delta)
 {
+    systemsManager.Update();
 }
 
 void GameScene::Render()
@@ -32,6 +50,8 @@ void GameScene::Render()
         break;
     }
 
+    _render->OnUpdate();
+
     // TODO: draw world entities (sprites, tiles etc.)
     _grid.Draw(window);
 
@@ -40,57 +60,42 @@ void GameScene::Render()
 
 void GameScene::LoadLevel()
 {
-    // Get level objects from the configuration
     const auto& levelObjects = gameEngine.Level();
-    
-    auto& posStorage = world.GetStorage<PositionComponent>();
 
-    // Iterate through all level objects from config
     for (const auto& obj : levelObjects)
     {
-        // Convert grid coordinates to world position
-        sf::Vector2f worldPos = _grid.GridToWorld({obj.x, obj.y});
-
-        // Create entity
-        int entity = world.CreateEntity();
-
-        // Add position component
-        posStorage.Add(entity, PositionComponent(worldPos.x, worldPos.y));
-
-        // Add components based on object type
+        sf::Vector2f worldPos = _grid.GridToWorld(
+            sf::Vector2i(obj.x, obj.y)
+        );
         if (obj.name == "Player")
         {
-            // Add player tag and components
-            // Example:
-            // world.GetStorage<PlayerTag>().Add(entity, PlayerTag{});
-            // world.GetStorage<VelocityComponent>().Add(entity, VelocityComponent(0, 0));
-            // world.GetStorage<BoundingBoxComponent>().Add(entity, BoundingBoxComponent(30, 30));
+            entityFactory->CreateEntity(EntityType::Player, worldPos);
         }
         else if (obj.name == "Tile")
         {
-            // Add tile components
-            // Example:
-            // world.GetStorage<TileComponent>().Add(entity, TileComponent{});
-            // Add sprite component with tile texture
+            entityFactory->CreateEntity(EntityType::Tile, worldPos);
         }
-        else if (obj.name == "Brick")
+        else if (obj.name == "Tile1")
         {
-            // Add brick components
-            // Example:
-            // world.GetStorage<BrickComponent>().Add(entity, BrickComponent{});
-            // world.GetStorage<DestructibleComponent>().Add(entity, DestructibleComponent{});
+            entityFactory->CreateEntity(EntityType::Tile1, worldPos);
+        }
+        else if (obj.name == "Brick_Tile")
+        {
+            entityFactory->CreateEntity(EntityType::BrickTile, worldPos);
         }
         else if (obj.name == "BigHill")
         {
-            // Add decoration component for hills
-            // world.GetStorage<DecorationComponent>().Add(entity, DecorationComponent("BigHill"));
+            entityFactory->CreateEntity(EntityType::BigHill, worldPos);
         }
-        else if (obj.name == "Pipe1" || obj.name == "Pipe2")
+        else if (obj.name == "PipeR")
         {
-            // Add pipe components
-            // world.GetStorage<PipeComponent>().Add(entity, PipeComponent(obj.name == "Pipe1" ? 1 : 2));
+            entityFactory->CreateEntity(EntityType::PipeRight, worldPos);
+        }
+        else if (obj.name == "PipeL")
+        {
+            entityFactory->CreateEntity(EntityType::PipeLeft, worldPos);
         }
     }
-    
-    std::cout << "[GameScene] Loaded " << levelObjects.size() << " level objects\n";
+
+    std::cout<< "[GameScene] Loaded "<< levelObjects.size()<< " level objects\n";
 }

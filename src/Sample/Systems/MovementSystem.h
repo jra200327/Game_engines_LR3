@@ -8,11 +8,14 @@
 #include "../Components/PositionComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Components/ShooterComponent.h"
+#include "../Components/SpriteComponent.h"
+
 #include "../../GameEngine/Input/InputManager.h"
 
 class MovementSystem final : public ISystem {
     ComponentStorage<PositionComponent>& _positionComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
+    ComponentStorage<SpriteComponent>& _spriteComponents;
 
     Filter _moveables;
     Filter _player;
@@ -27,6 +30,7 @@ public:
             _actions(actions),
             _positionComponents(world.GetStorage<PositionComponent>()),
             _movementComponents(world.GetStorage<MovementComponent>()),
+            _spriteComponents(world.GetStorage<SpriteComponent>()),
             _player(FilterBuilder(world)
                 .With<PositionComponent>()
                 .With<MovementComponent>()

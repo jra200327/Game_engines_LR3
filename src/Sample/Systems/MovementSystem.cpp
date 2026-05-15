@@ -17,23 +17,27 @@ void MovementSystem::OnUpdate()
         for (const auto ent : _player)
         {
             auto& movement = _movementComponents.Get(ent);
+            auto& sprite = _spriteComponents.Get(ent);
 
             movement.Direction.x = 0.f;
 
             if (_actions["move_left"]->Type() == ActionType::Start)
-                 movement.Direction.x -= 1.f;
+            {
+                movement.Direction.x -= 1.f;
+                sprite.flipped = true;
+            }
 
             if (_actions["move_right"]->Type() == ActionType::Start)
-                 movement.Direction.x += 1.f;
-
+            {
+                movement.Direction.x += 1.f;
+                sprite.flipped = false;
+            }
             if (_actions["jump"]->Type() == ActionType::Start)
             {
             }
-
-            Print(ent);
         }
 
-    for (const auto ent : _moveables)
+        for (const auto ent : _moveables)
         {
             auto& position = _positionComponents.Get(ent);
             auto& movement = _movementComponents.Get(ent);

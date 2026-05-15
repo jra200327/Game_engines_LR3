@@ -30,7 +30,7 @@ void EntityFactory::CreateEntity(EntityType type, sf::Vector2f pos)
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
         boxColliderStorage.Add(player1, BoxColliderComponent(24, 86));
         collisionStorage.Add(player1, CollisionComponent());
-        spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
+        spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f, true));
         shooterStorage.Add(player1, ShooterComponent(1));
     }
     else if(type == EntityType::Bullet)

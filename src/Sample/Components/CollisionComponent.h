@@ -5,9 +5,24 @@
 #include <vector>
 #include "BoxColliderComponent.h"
 
+enum class CollisionSide
+{
+    None,
+    Top,
+    Bottom,
+    Left,
+    Right
+};
+
+struct CollisionInfo
+{
+    int entity;
+    CollisionSide side;
+};
+
 struct CollisionComponent
 {
-    std::vector<int> CollisionEntities;
+    std::vector<CollisionInfo> Collisions;
 };
 
 #endif //COLLISIONCOMPONENT_H

@@ -13,7 +13,7 @@ struct SpriteComponent
     float rotation;
     float scale;
     bool flipped = false;
-    SpriteComponent(sf::Vector2i size_, sf::Vector2i atlasPos_, const sf::Texture& tex, float rotat, float scal, bool centered = false)
+    SpriteComponent(sf::Vector2i size_, sf::Vector2i atlasPos_, const sf::Texture& tex, float rotat, float scal)
         : size(size_),
           atlasPos(atlasPos_),
           rotation(rotat),
@@ -21,10 +21,7 @@ struct SpriteComponent
     {
         sprite = std::make_shared<sf::Sprite>(tex);
         sprite->setTextureRect(sf::IntRect(atlasPos, size));
-        if (centered)
-        {
-            sprite->setOrigin(sf::Vector2f(size.x/2, size.y/2));
-        }
+        sprite->setOrigin(sf::Vector2f(size.x/2, size.y/2));
         sprite->rotate(sf::degrees(rotation));
         sprite->setScale(sf::Vector2f(scale,scale));
     }

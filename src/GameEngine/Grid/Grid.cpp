@@ -38,8 +38,8 @@ sf::Vector2i Grid::WorldToGrid(sf::Vector2f worldPos) const
 sf::Vector2f Grid::GridToWorld(sf::Vector2i gridPos) const
 {
     return {
-        gridPos.x * _cellSize,
-        gridPos.y * _cellSize
+        gridPos.x * _cellSize + _cellSize * 0.5f,
+        gridPos.y * _cellSize + _cellSize * 0.5f
     };
 }
 

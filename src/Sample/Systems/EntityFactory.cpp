@@ -28,9 +28,9 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
 
         positionsStorage.Add(player1, PositionComponent(pos.x, pos.y));
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
-        boxColliderStorage.Add(player1, BoxColliderComponent(24, 86));
+        boxColliderStorage.Add(player1, BoxColliderComponent(48, 48));
         collisionStorage.Add(player1, CollisionComponent());
-        spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f, true));
+        spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
         shooterStorage.Add(player1, ShooterComponent(1));
     }
     else if(name == "Bullet")
@@ -54,81 +54,117 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Tile1)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Tile1), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Brick_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Brick_Tile), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Question_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Tile), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Question_Inactive_Tile)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Question_Inactive_Tile), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Pipe_Up_L)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_L), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Pipe_Up_R)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_Up_R), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Pipe_L)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_L), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::Pipe_R)
     {
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
         s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::Pipe_R), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 64));
     }
     else if (name == AssetNames::BigHill)
     {

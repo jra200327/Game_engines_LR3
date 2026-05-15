@@ -9,6 +9,8 @@
 #include "../Components/ShooterComponent.h"
 #include "../Components/AsteroidComponent.h"
 #include "../Components/BulletComponent.h"
+#include "../Components/BoxColliderComponent.h"
+#include "../Components/PositionComponent.h"
 
 class CollisionResolveSystem final : public ISystem {
     
@@ -16,6 +18,8 @@ class CollisionResolveSystem final : public ISystem {
     ComponentStorage<ShooterComponent>& _shooterComponents;
     ComponentStorage<AsteroidComponent>& _asteroidComponents;
     ComponentStorage<BulletComponent>& _bulletComponents;
+    ComponentStorage<BoxColliderComponent>& _boxColliderComponents;
+    ComponentStorage<PositionComponent>& _positionComponents;
 
     Filter _collideables;
 
@@ -26,6 +30,8 @@ public:
             _shooterComponents(world.GetStorage<ShooterComponent>()),
             _asteroidComponents(world.GetStorage<AsteroidComponent>()),
             _bulletComponents(world.GetStorage<BulletComponent>()),
+            _boxColliderComponents(world.GetStorage<BoxColliderComponent>()),
+            _positionComponents(world.GetStorage<PositionComponent>()),
             _collideables(FilterBuilder(world)
                 .With<CollisionComponent>()
                 .Build())

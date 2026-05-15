@@ -8,43 +8,49 @@ void CollisionResolveSystem::OnInit()
 }
 
 void CollisionResolveSystem::OnUpdate()
-{   
+{
     std::vector<int> toDestroy;
-
     for (auto ent : _collideables)
     {
         auto& collision = _collisionComponents.Get(ent);
 
-        for (auto other : collision.CollisionEntities)
+        for (const auto& info : collision.Collisions)
         {
-            if (ent >= other) continue;
-            bool isShooter1  = _shooterComponents.Has(ent);
-            bool isAsteroid1 = _asteroidComponents.Has(ent);
-            bool isBullet1   = _bulletComponents.Has(ent);
+            int other = info.entity;
+            CollisionSide side = info.side;
 
-            bool isShooter2  = _shooterComponents.Has(other);
-            bool isAsteroid2 = _asteroidComponents.Has(other);
-            bool isBullet2   = _bulletComponents.Has(other);
+            if (!world.IsEntityAlive(ent) || !world.IsEntityAlive(other))
+                continue;
 
-            if ((isBullet1 && isAsteroid2) || (isBullet2 && isAsteroid1))
+            bool isPlayer = _shooterComponents.Has(ent);
+            bool isWorld  = _boxColliderComponents.Has(other);
+
+            if (!isPlayer || !isWorld)
+                continue;
+
+            auto& pos = _positionComponents.Get(ent);
+            auto& box = _boxColliderComponents.Get(ent);
+
+            auto& otherPos = _positionComponents.Get(other);
+            auto& otherBox = _boxColliderComponents.Get(other);
+
+            if (side == CollisionSide::Left)
             {
-                int bullet   = isBullet1 ? ent   : other;
-                int asteroid = isAsteroid1 ? ent : other;
-
-                toDestroy.push_back(bullet);
-                toDestroy.push_back(asteroid);
-
-                std::cout << "Bullet hit asteroid" << std::endl;
+                pos.X = otherPos.X - box.Width;
             }
-            else if ((isShooter1 && isAsteroid2) || (isAsteroid1 && isShooter2))
+            else if (side == CollisionSide::Right)
             {
-                int player = isShooter1 ? ent : other;
-                int asteroid =  isAsteroid1 ? ent : other;
-
-                std::cout << "Player died" << std::endl;
+                pos.X = otherPos.X + otherBox.Width;
+            }
+            else if (side == CollisionSide::Top)
+            {
+                pos.Y = otherPos.Y - box.Height;
+            }
+            else if (side == CollisionSide::Bottom)
+            {
+                pos.Y = otherPos.Y + otherBox.Height;
             }
         }
-
     }
 
     for (auto ent : toDestroy)

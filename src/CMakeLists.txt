@@ -13,6 +13,7 @@ set(SOURCES main.cpp
         Sample/Components/ShooterComponent.h
         Sample/Components/BulletComponent.h
         Sample/Components/AsteroidComponent.h
+        Sample/Components/GravityComponent.h
         Sample/Components/CameraComponent.h
         Sample/Components/DefaultCameraTag.h
         Sample/Components/FollowXCameraTag.h
@@ -34,6 +35,8 @@ set(SOURCES main.cpp
         Sample/Systems/DefaultCameraSystem.cpp
         Sample/Systems/FollowXCameraSystem.h
         Sample/Systems/FollowXCameraSystem.cpp
+        Sample/Systems/GroundedResetSystem.h
+        Sample/Systems/GroundedResetSystem.cpp
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h

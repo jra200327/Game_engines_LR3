@@ -37,10 +37,43 @@ void MovementSystem::OnUpdate()
             }
         }
 
-        for (const auto ent : _moveables)
-        {
+        for (const auto ent : _gravityEntities)
+        {   
             auto& position = _positionComponents.Get(ent);
             auto& movement = _movementComponents.Get(ent);
+            auto& gravity  = _gravityComponents.Get(ent);
+
+            position.X += movement.Speed * movement.Direction.x;
+
+            if (!gravity.grounded)
+            {
+                gravity.currentVelocityY += gravity.gravity;
+            }
+            else
+            {
+                gravity.currentVelocityY = 0.f;
+            }
+
+            position.Y += gravity.currentVelocityY;
+        }
+
+        for (const auto ent : _moveables)
+        {
+            bool hasGravity = false;
+            for (const auto gravEnt : _gravityEntities)
+            {
+                if (ent == gravEnt)
+                {
+                    hasGravity = true;
+                    break;
+                }
+            }
+        
+            if (hasGravity) continue;
+        
+            auto& position = _positionComponents.Get(ent);
+            auto& movement = _movementComponents.Get(ent);
+        
             position.X += movement.Speed * movement.Direction.x;
             position.Y += movement.Speed * movement.Direction.y;
         }

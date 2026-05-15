@@ -45,10 +45,21 @@ void CollisionResolveSystem::OnUpdate()
             else if (side == CollisionSide::Top)
             {
                 pos.Y = otherPos.Y - box.Height;
+                if (_gravityComponents.Has(ent))
+                {
+                    auto& grav = _gravityComponents.Get(ent);
+                    grav.grounded = true;
+                    grav.currentVelocityY = 0; 
+                }
             }
             else if (side == CollisionSide::Bottom)
             {
                 pos.Y = otherPos.Y + otherBox.Height;
+                if (_movementComponents.Has(ent))
+                {
+                    auto& mov = _movementComponents.Get(ent);
+                    mov.Direction.y = 0;
+                }
             }
         }
     }

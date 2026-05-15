@@ -9,6 +9,7 @@
 #include "../Components/MovementComponent.h"
 #include "../Components/ShooterComponent.h"
 #include "../Components/SpriteComponent.h"
+#include "../Components/GravityComponent.h"
 
 #include "../../GameEngine/Input/InputManager.h"
 
@@ -16,13 +17,15 @@ class MovementSystem final : public ISystem {
     ComponentStorage<PositionComponent>& _positionComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
     ComponentStorage<SpriteComponent>& _spriteComponents;
+    ComponentStorage<GravityComponent>& _gravityComponents; 
 
     Filter _moveables;
     Filter _player;
+    Filter _gravityEntities;
 
     std::unordered_map<std::string, std::shared_ptr<InputAction>>& _actions;
 
-    void Print(int ent);  // Это тоже можно вынести в отдельную систему
+    void Print(int ent);
 
 public:
     MovementSystem(World &world, std::unordered_map<std::string, std::shared_ptr<InputAction>>& actions)
@@ -31,6 +34,7 @@ public:
             _positionComponents(world.GetStorage<PositionComponent>()),
             _movementComponents(world.GetStorage<MovementComponent>()),
             _spriteComponents(world.GetStorage<SpriteComponent>()),
+            _gravityComponents(world.GetStorage<GravityComponent>()),
             _player(FilterBuilder(world)
                 .With<PositionComponent>()
                 .With<MovementComponent>()
@@ -39,6 +43,11 @@ public:
             _moveables(FilterBuilder(world)
                 .With<PositionComponent>()
                 .With<MovementComponent>()
+                .Build()),
+            _gravityEntities(FilterBuilder(world)
+                .With<PositionComponent>()
+                .With<MovementComponent>()
+                .With<GravityComponent>()
                 .Build())
     {
     }

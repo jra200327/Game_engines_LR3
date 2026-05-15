@@ -11,6 +11,8 @@
 #include "../Components/BulletComponent.h"
 #include "../Components/BoxColliderComponent.h"
 #include "../Components/PositionComponent.h"
+#include "../Components/GravityComponent.h"
+#include "../Components/MovementComponent.h"
 
 class CollisionResolveSystem final : public ISystem {
     
@@ -20,6 +22,8 @@ class CollisionResolveSystem final : public ISystem {
     ComponentStorage<BulletComponent>& _bulletComponents;
     ComponentStorage<BoxColliderComponent>& _boxColliderComponents;
     ComponentStorage<PositionComponent>& _positionComponents;
+    ComponentStorage<GravityComponent>& _gravityComponents;
+    ComponentStorage<MovementComponent>& _movementComponents;
 
     Filter _collideables;
 
@@ -32,6 +36,8 @@ public:
             _bulletComponents(world.GetStorage<BulletComponent>()),
             _boxColliderComponents(world.GetStorage<BoxColliderComponent>()),
             _positionComponents(world.GetStorage<PositionComponent>()),
+            _gravityComponents(world.GetStorage<GravityComponent>()),
+            _movementComponents(world.GetStorage<MovementComponent>()),
             _collideables(FilterBuilder(world)
                 .With<CollisionComponent>()
                 .Build())

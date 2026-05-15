@@ -38,7 +38,6 @@ void MovementSystem::OnUpdate()
             {
                 if (gravity.grounded)
                 {
-                    std::cout<<"jump requested" << std::endl;
                     jump.jumpRequested = true;
                 }
             }
@@ -53,7 +52,6 @@ void MovementSystem::OnUpdate()
             if (_jumpComponents.Has(ent))
             {
                 auto& jump = _jumpComponents.Get(ent);
-                std::cout<<jump.jumpRequested<<std::endl;
                 if (jump.jumpRequested)
                 {
                     gravity.currentVelocityY = -jump.jumpSpeed;

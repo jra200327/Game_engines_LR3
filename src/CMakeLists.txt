@@ -42,6 +42,8 @@ set(SOURCES main.cpp
         Sample/Systems/AnimationSystem.cpp
         Sample/Systems/PlayerAnimationSystem.h
         Sample/Systems/PlayerAnimationSystem.cpp
+        Sample/Systems/PlayerRespawnSystem.h
+        Sample/Systems/PlayerRespawnSystem.cpp
         Sample/Components/MoveInputEvent.h
         Sample/Components/ShootEvent.h
         GameEngine/GameEngine.h

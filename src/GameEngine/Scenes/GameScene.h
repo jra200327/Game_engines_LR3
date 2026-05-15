@@ -31,6 +31,8 @@ class GameScene : public Scene
     Filter _cameras;
     Filter _players;
 
+    sf::Vector2f starterPos;
+
     ComponentStorage<CameraComponent>& _cameraComponents;
     ComponentStorage<PositionComponent>& _positionComponents;
 

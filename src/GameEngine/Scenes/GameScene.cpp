@@ -11,6 +11,7 @@
 #include "../../Sample/Systems/AnimationSystem.h"
 #include "../../Sample/Systems/PlayerAnimationSystem.h"
 #include "../../Sample/Systems/ShootingSystem.h"
+#include "../../Sample/Systems/PlayerRespawnSystem.h"
 
 void GameScene::Init()
 {
@@ -84,7 +85,16 @@ void GameScene::LoadLevel()
     {
         sf::Vector2f worldPos = _grid.GridToWorld(sf::Vector2i(obj.x, obj.y));
         entityFactory->CreateEntity(obj.name, worldPos);
+        if(obj.name == "Player")
+        {
+            starterPos = _grid.GridToWorld({obj.x, obj.y});
+            std::cout<<starterPos.y<<std::endl;
+        }
     }
 
     std::cout<< "[GameScene] Loaded "<< levelObjects.size()<< " level objects\n";
+
+    sf::Vector2u size = gameEngine.Window().getSize();
+    sf::Vector2f sizeF(static_cast<float>(size.x), static_cast<float>(size.y));
+    systemsManager.AddSystem(std::make_shared<PlayerRespawnSystem>(world, starterPos, sizeF.y));
 }

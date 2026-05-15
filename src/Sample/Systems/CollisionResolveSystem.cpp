@@ -12,6 +12,8 @@ void CollisionResolveSystem::OnUpdate()
     std::vector<int> toDestroy;
     for (auto ent : _collideables)
     {
+        bool onGroundThisFrame = false;
+
         auto& collision = _collisionComponents.Get(ent);
 
         for (const auto& info : collision.Collisions)
@@ -54,19 +56,27 @@ void CollisionResolveSystem::OnUpdate()
                 if (_gravityComponents.Has(ent))
                 {
                     auto& grav = _gravityComponents.Get(ent);
-                    grav.grounded = true;
-                    grav.currentVelocityY = 0; 
+                    if(grav.currentVelocityY >= 0)
+                    {
+                        onGroundThisFrame = true;
+                        grav.currentVelocityY = 0;
+                    } 
                 }
             }
             else if (side == CollisionSide::Bottom)
             {
                 pos.Y = otherPos.Y + otherBox.Height;
-                if (_movementComponents.Has(ent))
+                if (_gravityComponents.Has(ent))
                 {
-                    auto& mov = _movementComponents.Get(ent);
-                    mov.Direction.y = 0;
+                    auto& grav = _gravityComponents.Get(ent);
+                    grav.currentVelocityY = 0;
                 }
             }
+        }
+        if(_gravityComponents.Has(ent))
+        {
+            auto& grav = _gravityComponents.Get(ent);
+            grav.grounded = onGroundThisFrame;
         }
     }
 

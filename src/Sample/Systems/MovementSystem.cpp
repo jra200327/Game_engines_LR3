@@ -18,6 +18,8 @@ void MovementSystem::OnUpdate()
         {
             auto& movement = _movementComponents.Get(ent);
             auto& sprite = _spriteComponents.Get(ent);
+            auto& gravity = _gravityComponents.Get(ent);
+            auto& jump = _jumpComponents.Get(ent);
 
             movement.Direction.x = 0.f;
 
@@ -34,6 +36,11 @@ void MovementSystem::OnUpdate()
             }
             if (_actions["jump"]->Type() == ActionType::Start)
             {
+                if (gravity.grounded)
+                {
+                    std::cout<<"jump requested" << std::endl;
+                    jump.jumpRequested = true;
+                }
             }
         }
 
@@ -43,11 +50,27 @@ void MovementSystem::OnUpdate()
             auto& movement = _movementComponents.Get(ent);
             auto& gravity  = _gravityComponents.Get(ent);
 
+            if (_jumpComponents.Has(ent))
+            {
+                auto& jump = _jumpComponents.Get(ent);
+                std::cout<<jump.jumpRequested<<std::endl;
+                if (jump.jumpRequested)
+                {
+                    gravity.currentVelocityY = -jump.jumpSpeed;
+                    gravity.grounded = false;
+                    jump.jumpRequested = false;
+                }
+            }
+
             position.X += movement.Speed * movement.Direction.x;
 
             if (!gravity.grounded)
             {
                 gravity.currentVelocityY += gravity.gravity;
+                if(gravity.currentVelocityY > gravity.maxVelocityY)
+                    gravity.currentVelocityY = gravity.maxVelocityY;
+                if (gravity.currentVelocityY < -gravity.maxVelocityY)
+                    gravity.currentVelocityY = -gravity.maxVelocityY;
             }
             else
             {

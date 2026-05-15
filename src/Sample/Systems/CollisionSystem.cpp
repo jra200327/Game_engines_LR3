@@ -62,7 +62,7 @@ void CollisionSystem::OnUpdate()
         auto& collision = _collisionComponents.Get(ent);
         collision.Collisions.clear();
     }
-    
+
     for (auto it1 = _collideables.begin(); it1 != _collideables.end(); ++it1)
     {
         auto ent1 = *it1;
@@ -173,8 +173,6 @@ void CollisionSystem::OnUpdate()
             {
                 collision1.Collisions.push_back({ent2, side});
                 collision2.Collisions.push_back({ent1, OppositeSide(side)});
-
-                Print(ent1, ent2);
             }
         }
     }

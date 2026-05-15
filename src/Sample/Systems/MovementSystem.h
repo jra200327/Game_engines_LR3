@@ -7,6 +7,7 @@
 
 #include "../Components/PositionComponent.h"
 #include "../Components/MovementComponent.h"
+#include "../Components/JumpComponent.h"
 #include "../Components/ShooterComponent.h"
 #include "../Components/SpriteComponent.h"
 #include "../Components/GravityComponent.h"
@@ -17,7 +18,8 @@ class MovementSystem final : public ISystem {
     ComponentStorage<PositionComponent>& _positionComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
     ComponentStorage<SpriteComponent>& _spriteComponents;
-    ComponentStorage<GravityComponent>& _gravityComponents; 
+    ComponentStorage<GravityComponent>& _gravityComponents;
+    ComponentStorage<JumpComponent>& _jumpComponents; 
 
     Filter _moveables;
     Filter _player;
@@ -35,6 +37,7 @@ public:
             _movementComponents(world.GetStorage<MovementComponent>()),
             _spriteComponents(world.GetStorage<SpriteComponent>()),
             _gravityComponents(world.GetStorage<GravityComponent>()),
+            _jumpComponents(world.GetStorage<JumpComponent>()),
             _player(FilterBuilder(world)
                 .With<PositionComponent>()
                 .With<MovementComponent>()

@@ -14,6 +14,7 @@
 #include "../Components/DefaultCameraTag.h"
 #include "../Components/FollowXCameraTag.h"
 #include "../Components/AnimationComponent.h"
+#include "../Components/JumpComponent.h"
 #include "../../Ecs/Filter/Filter.h"
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include <random>
@@ -31,6 +32,7 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& shooterStorage = _world.GetStorage<ShooterComponent>();
         auto& gravityStorage = _world.GetStorage<GravityComponent>();
         auto& animationStorage = _world.GetStorage<AnimationComponent>();
+        auto& jumpStorage = _world.GetStorage<JumpComponent>();
 
         positionsStorage.Add(player1, PositionComponent(pos.x, pos.y));
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
@@ -39,6 +41,7 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
         shooterStorage.Add(player1, ShooterComponent(60));
         gravityStorage.Add(player1, GravityComponent());
+        jumpStorage.Add(player1, JumpComponent(20));
 
         AnimationComponent anims;
         std::cout << "[DEBUG] idle tex addr = "

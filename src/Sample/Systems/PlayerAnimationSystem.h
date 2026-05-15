@@ -9,6 +9,7 @@
 #include "../Components/AnimationComponent.h"
 #include "../Components/ShooterComponent.h"
 #include "../Components/MovementComponent.h"
+#include "../Components/GravityComponent.h"
 
 class PlayerAnimationSystem final : public ISystem
 {
@@ -16,6 +17,7 @@ class PlayerAnimationSystem final : public ISystem
     ComponentStorage<AnimationComponent>& _animationComponents;
     ComponentStorage<ShooterComponent>& _shooterComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
+    ComponentStorage<GravityComponent>& _gravityComponents;
 
     Filter _player;
 
@@ -26,6 +28,7 @@ public:
           _animationComponents(world.GetStorage<AnimationComponent>()),
           _movementComponents(world.GetStorage<MovementComponent>()),
           _shooterComponents(world.GetStorage<ShooterComponent>()),
+          _gravityComponents(world.GetStorage<GravityComponent>()),
           _player(FilterBuilder(world)
               .With<SpriteComponent>()
               .With<AnimationComponent>()

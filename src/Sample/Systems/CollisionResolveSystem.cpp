@@ -22,6 +22,12 @@ void CollisionResolveSystem::OnUpdate()
             if (!world.IsEntityAlive(ent) || !world.IsEntityAlive(other))
                 continue;
 
+            bool playerBulletCollision = (_shooterComponents.Has(ent) && _bulletComponents.Has(other)) ||
+                (_bulletComponents.Has(ent) && _shooterComponents.Has(other));
+
+            if (playerBulletCollision)
+                continue;
+            
             bool isPlayer = _shooterComponents.Has(ent);
             bool isWorld  = _boxColliderComponents.Has(other);
 

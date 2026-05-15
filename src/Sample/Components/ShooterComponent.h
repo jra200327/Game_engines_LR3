@@ -3,8 +3,9 @@
 
 struct ShooterComponent
 {
-    float cd;
+    float cd = 60;
     float timer = 0;
+    bool shooting = false;
 };
 
 #endif //SHOOTERCOMPONENT_H

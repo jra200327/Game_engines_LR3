@@ -16,6 +16,9 @@ namespace AssetNames {
     inline const std::string TexRun = "TexRun";
     inline const std::string TexIdle = "TexIdle";
     inline const std::string TexJump = "TexJump";
+    inline const std::string TexShootRun = "TexShootRun";
+    inline const std::string TexShootIdle = "TexShootIdle";
+    inline const std::string TexShootJump = "TexShootJump";
     inline const std::string Tile = "Tile";
     inline const std::string Tile1 = "Tile1";
     inline const std::string Brick_Tile = "Brick_Tile";
@@ -27,11 +30,15 @@ namespace AssetNames {
     inline const std::string Pipe_Up_L = "Pipe_Up_L";
     inline const std::string Finish = "Finish";
     inline const std::string BigHill = "BigHill";
+    inline const std::string Bullet = "Bullet";
     
     // Анимации
     inline const std::string RunAnim = "RunAnim";
     inline const std::string IdleAnim = "IdleAnim";
     inline const std::string JumpAnim = "JumpAnim";
+    inline const std::string ShootRunAnim = "ShootRunAnim";
+    inline const std::string ShootIdleAnim = "ShootIdleAnim";
+    inline const std::string ShootJumpAnim = "ShootJumpAnim";
     
     // Шрифты
     inline const std::string BaseFont = "futura";

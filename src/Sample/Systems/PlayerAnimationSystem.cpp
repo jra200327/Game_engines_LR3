@@ -9,13 +9,28 @@ void PlayerAnimationSystem::OnUpdate()
     {
         auto& anim = _animationComponents.Get(ent);
         auto& mov = _movementComponents.Get(ent);
-        if (anim.CurrentAnimation != AssetNames::RunAnim && (mov.Direction.x < 0 || mov.Direction.x > 0))
+        auto& shoot = _shooterComponents.Get(ent);
+        if (shoot.shooting)
         {
-            anim.CurrentAnimation = AssetNames::RunAnim;
+            if (anim.CurrentAnimation != AssetNames::ShootRunAnim && (mov.Direction.x < 0 || mov.Direction.x > 0))
+            {
+                anim.CurrentAnimation = AssetNames::ShootRunAnim;
+            }
+            else if (anim.CurrentAnimation != AssetNames::ShootIdleAnim && mov.Direction.x == 0)
+            {
+                anim.CurrentAnimation = AssetNames::ShootIdleAnim;
+            }
         }
-        else if (anim.CurrentAnimation != AssetNames::IdleAnim && mov.Direction.x == 0)
+        else
         {
-            anim.CurrentAnimation = AssetNames::IdleAnim;
+            if (anim.CurrentAnimation != AssetNames::RunAnim && (mov.Direction.x < 0 || mov.Direction.x > 0))
+            {
+                anim.CurrentAnimation = AssetNames::RunAnim;
+            }
+            else if (anim.CurrentAnimation != AssetNames::IdleAnim && mov.Direction.x == 0)
+            {
+                anim.CurrentAnimation = AssetNames::IdleAnim;
+            }
         }
     }
 }

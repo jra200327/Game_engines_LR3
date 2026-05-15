@@ -11,16 +11,19 @@
 #include "../../Sample/Systems/GroundedResetSystem.h"
 #include "../../Sample/Systems/AnimationSystem.h"
 #include "../../Sample/Systems/PlayerAnimationSystem.h"
+#include "../../Sample/Systems/ShootingSystem.h"
 
 void GameScene::Init()
 {
     RegisterAction(sf::Keyboard::Key::A, "move_left");
     RegisterAction(sf::Keyboard::Key::D, "move_right");
     RegisterAction(sf::Keyboard::Key::W, "jump");
+    RegisterAction(sf::Keyboard::Key::Space, "shoot");
 
     _actions["move_left"] = actionMap["move_left"];
     _actions["move_right"] = actionMap["move_right"];
     _actions["jump"] = actionMap["jump"];
+    _actions["shoot"] = actionMap["shoot"];
 
     entityFactory = std::make_shared<EntityFactory>(world, gameEngine.Assets());
 
@@ -33,6 +36,7 @@ void GameScene::Init()
     systemsManager.AddSystem(std::make_shared<PlayerAnimationSystem>(world));
     systemsManager.AddSystem(std::make_shared<AnimationSystem>(world));
     systemsManager.AddSystem(std::make_shared<MovementSystem>(world, _actions));
+    systemsManager.AddSystem(std::make_shared<ShootingSystem>(world, *entityFactory, _actions["shoot"]));
     systemsManager.AddSystem(std::make_shared<CollisionSystem>(world));
     systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world));
     

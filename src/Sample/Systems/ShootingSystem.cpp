@@ -7,7 +7,7 @@ void ShootingSystem::OnInit()
 
 void ShootingSystem::OnUpdate()
 {
-    for (const auto eventEntity : _shootInputEvents)
+    if (_shootAction->Type() == ActionType::Start)
     {
         for (const auto ent : _shooter)
         {
@@ -18,12 +18,18 @@ void ShootingSystem::OnUpdate()
             {
                 _factory.CreateEntity("Bullet", sf::Vector2f(position.X, position.Y));
                 shoot.timer = shoot.cd;
-                std::cout << "Pew" << std::endl;;
+                std::cout << "Pew" << std::endl;
             }
-            
+            shoot.shooting = true;
         }
-
-        world.RemoveEntity(eventEntity);
+    }
+    else
+    {
+        for (const auto ent : _shooter)
+        {
+            auto& shoot = _shooterComponents.Get(ent);
+            shoot.shooting = false;
+        }
     }
 
     for (const auto ent : _shooter)

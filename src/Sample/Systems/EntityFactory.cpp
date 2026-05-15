@@ -14,6 +14,8 @@
 #include "../Components/DefaultCameraTag.h"
 #include "../Components/FollowXCameraTag.h"
 #include "../Components/AnimationComponent.h"
+#include "../../Ecs/Filter/Filter.h"
+#include "../../Ecs/Filter/FilterBuilder.h"
 #include <random>
 
 void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
@@ -35,7 +37,7 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         boxColliderStorage.Add(player1, BoxColliderComponent(48, 56));
         collisionStorage.Add(player1, CollisionComponent());
         spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
-        shooterStorage.Add(player1, ShooterComponent(1));
+        shooterStorage.Add(player1, ShooterComponent(60));
         gravityStorage.Add(player1, GravityComponent());
 
         AnimationComponent anims;
@@ -45,10 +47,16 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         Animation idleAnim = _assets.GetAnimation(AssetNames::IdleAnim);
         Animation runAnim = _assets.GetAnimation(AssetNames::RunAnim);
         Animation jumpAnim = _assets.GetAnimation(AssetNames::JumpAnim);
+        Animation shootIdleAnim = _assets.GetAnimation(AssetNames::ShootIdleAnim);
+        Animation shootRunAnim = _assets.GetAnimation(AssetNames::ShootRunAnim);
+        Animation shootJumpAnim = _assets.GetAnimation(AssetNames::ShootJumpAnim);
 
         anims.Animations.emplace(AssetNames::IdleAnim, idleAnim);
         anims.Animations.emplace(AssetNames::RunAnim, runAnim);
         anims.Animations.emplace(AssetNames::JumpAnim, jumpAnim);
+        anims.Animations.emplace(AssetNames::ShootIdleAnim, shootIdleAnim);
+        anims.Animations.emplace(AssetNames::ShootRunAnim, shootRunAnim);
+        anims.Animations.emplace(AssetNames::ShootJumpAnim, shootJumpAnim);
 
         anims.CurrentAnimation = AssetNames::IdleAnim;
 
@@ -65,11 +73,29 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         auto& spriteStorage = _world.GetStorage<SpriteComponent>();
         auto& bulletStorage = _world.GetStorage<BulletComponent>();
 
+        auto& shooterStorage = _world.GetStorage<ShooterComponent>();
+        Filter shooter(FilterBuilder(_world)
+                .With<ShooterComponent>()
+                .With<PositionComponent>()
+                .Build());
+
+        float xdir = 0;
+        
+        for (int ent : shooter)
+        {
+            auto& spr = spriteStorage.Get(ent);
+            if(spr.flipped)
+                xdir = -1;
+            else
+                xdir = 1;
+        }
+        
         positionsStorage.Add(bullet, PositionComponent(pos.x, pos.y));
-        movementsStorage.Add(bullet, MovementComponent(50, sf::Vector2f(0, -1)));
+        movementsStorage.Add(bullet, MovementComponent(20, sf::Vector2f(xdir, 0)));
         boxColliderStorage.Add(bullet, BoxColliderComponent(8, 8));
         collisionStorage.Add(bullet, CollisionComponent());
         bulletStorage.Add(bullet, BulletComponent());
+        spriteStorage.Add(bullet, SpriteComponent({8, 8}, {0, 0}, _assets.GetTexture(AssetNames::Bullet), 0.f, 1.f));
     }
      else if (name == AssetNames::Tile)
     {

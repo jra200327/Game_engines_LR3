@@ -30,7 +30,7 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
 
         positionsStorage.Add(player1, PositionComponent(pos.x, pos.y));
         movementsStorage.Add(player1, MovementComponent(10, sf::Vector2f(0, 0)));
-        boxColliderStorage.Add(player1, BoxColliderComponent(48, 48));
+        boxColliderStorage.Add(player1, BoxColliderComponent(48, 56));
         collisionStorage.Add(player1, CollisionComponent());
         spriteStorage.Add(player1, SpriteComponent({24, 24}, {0, 0}, _assets.GetTexture(AssetNames::TexRun), 0.f, 2.f));
         shooterStorage.Add(player1, ShooterComponent(1));

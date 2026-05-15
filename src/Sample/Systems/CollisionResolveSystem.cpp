@@ -85,6 +85,12 @@ void CollisionResolveSystem::OnUpdate()
                     auto& grav = _gravityComponents.Get(ent);
                     grav.currentVelocityY = 0;
                 }
+                if(isPlayer1 && isWorld2)
+                {
+                    auto& object = _objectComponents.Get(other);
+                    if(object.destroyable)
+                    toDestroy.push_back(other);
+                }
             }
         }
         if(_gravityComponents.Has(ent))

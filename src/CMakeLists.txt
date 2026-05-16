@@ -21,6 +21,7 @@ set(SOURCES main.cpp
         Sample/Components/AnimationComponent.h
         Sample/Components/JumpComponent.h
         Sample/Components/ObjectComponent.h
+        Sample/Components/FinishTag.h
         Sample/Systems/InputSystem.cpp
         Sample/Systems/InputSystem.h
         Sample/Systems/CollisionSystem.cpp

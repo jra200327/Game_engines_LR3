@@ -40,7 +40,7 @@ void GameScene::Init()
     systemsManager.AddSystem(std::make_shared<MovementSystem>(world, _actions));
     systemsManager.AddSystem(std::make_shared<ShootingSystem>(world, *entityFactory, _actions["shoot"]));
     systemsManager.AddSystem(std::make_shared<CollisionSystem>(world));
-    systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world, *entityFactory));
+    systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world, *entityFactory, gameEngine));
     systemsManager.AddSystem(std::make_shared<CleanerSystem>(world));
     
     _render->OnInit();

@@ -19,6 +19,7 @@ Textures:
   BigHill ../../Assets/Textures/hillBig.png
   SmallHill ../../Assets/Textures/hillSmall.png
   Bullet ../../Assets/Textures/Bullet.png
+  Finish ../../Assets/Textures/finish.png
 Animations:
   RunAnim TexRun 3 5
   IdleAnim TexIdle 3 20

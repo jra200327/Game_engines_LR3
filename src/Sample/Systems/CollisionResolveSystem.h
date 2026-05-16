@@ -14,6 +14,8 @@
 #include "../Components/GravityComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Components/ObjectComponent.h"
+#include "../Components/FinishTag.h"
+#include "../../GameEngine/GameEngine.h"
 #include "EntityFactory.h"
 
 class CollisionResolveSystem final : public ISystem {
@@ -27,15 +29,18 @@ class CollisionResolveSystem final : public ISystem {
     ComponentStorage<GravityComponent>& _gravityComponents;
     ComponentStorage<MovementComponent>& _movementComponents;
     ComponentStorage<ObjectComponent>& _objectComponents;
+    ComponentStorage<FinishTag>& _finishComponents;
 
     Filter _collideables;
 
     EntityFactory &_factory;
+    GameEngine &_engine;
 
 public:
-    CollisionResolveSystem(World &world, EntityFactory &factory)
+    CollisionResolveSystem(World &world, EntityFactory &factory, GameEngine &engine)
         : ISystem(world),
             _factory(factory),
+            _engine(engine),
             _collisionComponents(world.GetStorage<CollisionComponent>()),
             _shooterComponents(world.GetStorage<ShooterComponent>()),
             _asteroidComponents(world.GetStorage<AsteroidComponent>()),
@@ -45,6 +50,7 @@ public:
             _gravityComponents(world.GetStorage<GravityComponent>()),
             _movementComponents(world.GetStorage<MovementComponent>()),
             _objectComponents(world.GetStorage<ObjectComponent>()),
+            _finishComponents(world.GetStorage<FinishTag>()),
             _collideables(FilterBuilder(world)
                 .With<CollisionComponent>()
                 .Build())

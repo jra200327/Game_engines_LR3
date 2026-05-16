@@ -27,10 +27,12 @@ void CollisionResolveSystem::OnUpdate()
             bool isPlayer1 = _shooterComponents.Has(ent);
             bool isBullet1 = _bulletComponents.Has(ent);
             bool isWorld1 = _objectComponents.Has(ent);
+            bool isFinish1 = _finishComponents.Has(ent);
 
             bool isPlayer2 = _shooterComponents.Has(other);
             bool isBullet2 = _bulletComponents.Has(other);
             bool isWorld2  = _objectComponents.Has(other);
+            bool isFinish2 = _finishComponents.Has(other);
 
             if ((isPlayer1 && isBullet2) || (isBullet1 && isPlayer2))
                 continue;
@@ -50,6 +52,15 @@ void CollisionResolveSystem::OnUpdate()
                     auto& pos = _positionComponents.Get(world);
                     _factory.CreateEntity(AssetNames::ExplosionAnim, {pos.X, pos.Y});
                 }
+
+            }
+
+            if ((isPlayer1 && isFinish2) || (isFinish1 && isPlayer2))
+            {
+                int player   = isPlayer1 ? ent   : other;
+                int finish = isFinish1 ? ent : other;
+
+                _engine.LoadScene<MenuScene>();
 
             }
 

@@ -17,6 +17,7 @@
 #include "../Components/JumpComponent.h"
 #include "../Components/ObjectComponent.h"
 #include "../Components/ExplosionTag.h"
+#include "../Components/FinishTag.h"
 #include "../../Ecs/Filter/Filter.h"
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include <random>
@@ -252,9 +253,17 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
         int e = _world.CreateEntity();
         auto& p = _world.GetStorage<PositionComponent>();
         auto& s = _world.GetStorage<SpriteComponent>();
+        auto& collisionStorage = _world.GetStorage<CollisionComponent>();
+        auto& boxColliderStorage = _world.GetStorage<BoxColliderComponent>();
+        auto& objectStorage = _world.GetStorage<ObjectComponent>();
+        auto& fin = _world.GetStorage<FinishTag>();
 
         p.Add(e, PositionComponent(pos.x, pos.y));
-        s.Add(e, SpriteComponent({64, 128}, {0, 0}, _assets.GetTexture(AssetNames::Finish), 0.f, 1.f));
+        s.Add(e, SpriteComponent({64, 512}, {0, 0}, _assets.GetTexture(AssetNames::Finish), 0.f, 1.f));
+        collisionStorage.Add(e, CollisionComponent());
+        boxColliderStorage.Add(e, BoxColliderComponent(64, 512));
+        objectStorage.Add(e, ObjectComponent(false));
+        fin.Add(e, FinishTag());
     }
     else if (name == "DefautlCamera")
     {

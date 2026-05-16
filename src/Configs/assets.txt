@@ -5,6 +5,7 @@ Textures:
   TexShootIdle ../../Assets/Animations/MegaShootIdle.png
   TexShootRun ../../Assets/Animations/MegaShootRun.png
   TexShootJump ../../Assets/Animations/MegaShootJump.png
+  TexExplosion ../../Assets/Animations/explosion.png
   Tile ../../Assets/Textures/tile.png
   Tile1 ../../Assets/Textures/tile1.png
   Brick_Tile ../../Assets/Textures/brick_tile.png
@@ -25,5 +26,6 @@ Animations:
   ShootRunAnim TexShootRun 3 5
   ShootIdleAnim TexShootIdle 1 20
   ShootJumpAnim TexShootJump 1 60
+  ExplosionAnim TexExplosion 12 5
 Fonts:
   futura ../../Assets/Fonts/futura.ttf

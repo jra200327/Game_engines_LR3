@@ -14,6 +14,7 @@
 #include "../Components/GravityComponent.h"
 #include "../Components/MovementComponent.h"
 #include "../Components/ObjectComponent.h"
+#include "EntityFactory.h"
 
 class CollisionResolveSystem final : public ISystem {
     
@@ -29,9 +30,12 @@ class CollisionResolveSystem final : public ISystem {
 
     Filter _collideables;
 
+    EntityFactory &_factory;
+
 public:
-    CollisionResolveSystem(World &world)
+    CollisionResolveSystem(World &world, EntityFactory &factory)
         : ISystem(world),
+            _factory(factory),
             _collisionComponents(world.GetStorage<CollisionComponent>()),
             _shooterComponents(world.GetStorage<ShooterComponent>()),
             _asteroidComponents(world.GetStorage<AsteroidComponent>()),

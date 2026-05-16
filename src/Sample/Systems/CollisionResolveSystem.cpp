@@ -44,7 +44,13 @@ void CollisionResolveSystem::OnUpdate()
 
                 auto& object = _objectComponents.Get(world);
                 if(object.destroyable)
+                {
                     toDestroy.push_back(world);
+
+                    auto& pos = _positionComponents.Get(world);
+                    _factory.CreateEntity(AssetNames::ExplosionAnim, {pos.X, pos.Y});
+                }
+
             }
 
             if (!isPlayer1 || !isWorld2)
@@ -89,7 +95,12 @@ void CollisionResolveSystem::OnUpdate()
                 {
                     auto& object = _objectComponents.Get(other);
                     if(object.destroyable)
+                {
                     toDestroy.push_back(other);
+
+                    auto& pos = _positionComponents.Get(other);
+                    _factory.CreateEntity(AssetNames::ExplosionAnim, {pos.X, pos.Y});
+                }
                 }
             }
         }

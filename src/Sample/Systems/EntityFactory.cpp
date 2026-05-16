@@ -16,6 +16,7 @@
 #include "../Components/AnimationComponent.h"
 #include "../Components/JumpComponent.h"
 #include "../Components/ObjectComponent.h"
+#include "../Components/ExplosionTag.h"
 #include "../../Ecs/Filter/Filter.h"
 #include "../../Ecs/Filter/FilterBuilder.h"
 #include <random>
@@ -272,5 +273,30 @@ void EntityFactory::CreateEntity(std::string name, sf::Vector2f pos)
 
         cam.Add(e, CameraComponent(sf::View(sf::FloatRect({0.f, 0.f}, {pos.x, pos.y}))));
         tag.Add(e, FollowXCameraTag());
+    }
+    else if (name == AssetNames::ExplosionAnim)
+    {
+        int e = _world.CreateEntity();
+        auto& p = _world.GetStorage<PositionComponent>();
+        auto& s = _world.GetStorage<SpriteComponent>();
+        auto& a = _world.GetStorage<AnimationComponent>();
+        auto& expl = _world.GetStorage<ExplosionTag>();
+
+        p.Add(e, PositionComponent(pos.x, pos.y));
+        s.Add(e, SpriteComponent({64, 64}, {0, 0}, _assets.GetTexture(AssetNames::TexExplosion), 0.f, 2.f));
+        expl.Add(e, ExplosionTag());
+
+        AnimationComponent anims;
+        std::cout << "[DEBUG] idle tex addr = "
+          << &_assets.GetTexture(AssetNames::TexIdle) << std::endl;
+
+        Animation explosionAnim = _assets.GetAnimation(AssetNames::ExplosionAnim);
+
+        anims.Animations.emplace(AssetNames::ExplosionAnim, explosionAnim);
+
+        anims.CurrentAnimation = AssetNames::ExplosionAnim;
+
+        a.Add(e, anims);
+
     }
 }

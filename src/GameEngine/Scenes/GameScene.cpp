@@ -12,6 +12,7 @@
 #include "../../Sample/Systems/PlayerAnimationSystem.h"
 #include "../../Sample/Systems/ShootingSystem.h"
 #include "../../Sample/Systems/PlayerRespawnSystem.h"
+#include "../../Sample/Systems/CleanerSystem.h"
 
 void GameScene::Init()
 {
@@ -39,7 +40,8 @@ void GameScene::Init()
     systemsManager.AddSystem(std::make_shared<MovementSystem>(world, _actions));
     systemsManager.AddSystem(std::make_shared<ShootingSystem>(world, *entityFactory, _actions["shoot"]));
     systemsManager.AddSystem(std::make_shared<CollisionSystem>(world));
-    systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world));
+    systemsManager.AddSystem(std::make_shared<CollisionResolveSystem>(world, *entityFactory));
+    systemsManager.AddSystem(std::make_shared<CleanerSystem>(world));
     
     _render->OnInit();
     systemsManager.Initialize();
@@ -72,7 +74,7 @@ void GameScene::Render()
     _render->OnUpdate();
 
     // TODO: draw world entities (sprites, tiles etc.)
-    _grid.Draw(window);
+    //_grid.Draw(window);
 
     window.setView(window.getDefaultView());
 }
